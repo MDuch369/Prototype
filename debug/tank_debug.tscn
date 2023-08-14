@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdpfgn4cn8rvr"]
+
+[ext_resource type="Script" path="res://debug/TankDebug.gd" id="1_fogrp"]
+[ext_resource type="Texture2D" uid="uid://27vyfk6rnvl7" path="res://assets/custom/units/tank_debug.png" id="2_52cew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47wpc"]
+size = Vector2(140, 75)
+
+[node name="TankDebug" type="CharacterBody2D"]
+script = ExtResource("1_fogrp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, -0.5)
+shape = SubResource("RectangleShape2D_47wpc")
+
+[node name="TankDebug" type="Sprite2D" parent="."]
+position = Vector2(8, 0)
+texture = ExtResource("2_52cew")

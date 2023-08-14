@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2slpksnxuu8o"]
+
+[ext_resource type="Script" path="res://units/combat_unit.gd" id="1_qjyuh"]
+[ext_resource type="Texture2D" uid="uid://b2eqdnmiw2eeh" path="res://assets/custom/units/tank_enemy.png" id="3_0tsix"]
+[ext_resource type="Texture2D" uid="uid://ulj57liwy45e" path="res://assets/custom/objects/smoke_big.png" id="4_vccwl"]
+[ext_resource type="Texture2D" uid="uid://cth5ticbwrlw0" path="res://assets/custom/objects/tank_fire.png" id="5_rvpfr"]
+[ext_resource type="PackedScene" uid="uid://c15lmpxlj24we" path="res://unit_modules/propulsion.tscn" id="6_hws6u"]
+[ext_resource type="Script" path="res://unit_modules/Cannon.gd" id="6_lxbt6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_taqbt"]
+size = Vector2(140, 76)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hf3tv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.968627, 0.176471, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Animation" id="Animation_dxuo6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_o1igj"]
+resource_name = "tank_fire"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38qsv"]
+_data = {
+"RESET": SubResource("Animation_dxuo6"),
+"tank_fire": SubResource("Animation_o1igj")
+}
+
+[node name="Tank" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_qjyuh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-12, -1)
+shape = SubResource("RectangleShape2D_taqbt")
+
+[node name="Box" type="Panel" parent="."]
+offset_left = -91.0
+offset_top = -48.0
+offset_right = 68.0
+offset_bottom = 47.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hf3tv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../TankFire")
+libraries = {
+"": SubResource("AnimationLibrary_38qsv")
+}
+
+[node name="TankEnemy" type="Sprite2D" parent="."]
+position = Vector2(3, 0)
+texture = ExtResource("3_0tsix")
+
+[node name="SmokeBig" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-188, -3)
+texture = ExtResource("4_vccwl")
+
+[node name="TankFire" type="Sprite2D" parent="."]
+position = Vector2(104, -1)
+texture = ExtResource("5_rvpfr")
+hframes = 2
+
+[node name="Modules" type="Node2D" parent="."]
+
+[node name="Cannon" type="Node2D" parent="Modules"]
+script = ExtResource("6_lxbt6")
+current_resources = 30
+
+[node name="Propulsion" parent="Modules" instance=ExtResource("6_hws6u")]

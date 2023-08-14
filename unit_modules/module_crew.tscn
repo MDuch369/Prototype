@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfvqvq722r7d"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_a8eho"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_ovcry"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_0gjux"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_2kcts"]
+
+[node name="ModuleCrew" type="Node"]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("1_a8eho")
+
+[node name="Crew" type="Node" parent="StateChart"]
+script = ExtResource("2_ovcry")
+initial_state = NodePath("Full")
+
+[node name="Full" type="Node" parent="StateChart/Crew"]
+script = ExtResource("3_0gjux")
+
+[node name="On Crew Empty" type="Node" parent="StateChart/Crew/Full"]
+script = ExtResource("4_2kcts")
+to = NodePath("../../Empty")
+event = &"crew empty"
+
+[node name="Empty" type="Node" parent="StateChart/Crew"]
+script = ExtResource("3_0gjux")
+
+[node name="On Crew Full" type="Node" parent="StateChart/Crew/Empty"]
+script = ExtResource("4_2kcts")
+to = NodePath("../../Full")
+event = &"crew full"

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://blh0wkwqu4dxi"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_cefjg"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_l2myl"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_57pjy"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_25pjc"]
+
+[node name="ModuleResource" type="Node"]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("1_cefjg")
+
+[node name="Resource" type="Node" parent="StateChart"]
+script = ExtResource("2_l2myl")
+initial_state = NodePath("Present")
+
+[node name="Present" type="Node" parent="StateChart/Resource"]
+script = ExtResource("3_57pjy")
+
+[node name="On Resource Empty" type="Node" parent="StateChart/Resource/Present"]
+script = ExtResource("4_25pjc")
+to = NodePath("../../Empty")
+event = &"resource empty"
+
+[node name="Empty" type="Node" parent="StateChart/Resource"]
+script = ExtResource("3_57pjy")
+
+[node name="On Resource Filled" type="Node" parent="StateChart/Resource/Empty"]
+script = ExtResource("4_25pjc")
+to = NodePath("../../Present")
+event = &"resource filled"

@@ -1,0 +1,147 @@
+[gd_scene load_steps=14 format=3 uid="uid://c15lmpxlj24we"]
+
+[ext_resource type="Script" path="res://unit_modules/propulsion.gd" id="1_nmxp2"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_61vd3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_pm1y1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_0a7o8"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_cixm3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_l6gn5"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="7_303nx"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="8_apj4c"]
+
+[sub_resource type="Resource" id="Resource_wst0f"]
+script = ExtResource("7_303nx")
+state = NodePath("../../../Crew/Crew Enabled")
+
+[sub_resource type="Resource" id="Resource_2d24i"]
+script = ExtResource("7_303nx")
+state = NodePath("../../../Fuel/Fuel Present")
+
+[sub_resource type="Resource" id="Resource_idwnn"]
+script = ExtResource("7_303nx")
+state = NodePath("../../../Damage/Not Damaged")
+
+[sub_resource type="Resource" id="Resource_q8vfd"]
+script = ExtResource("8_apj4c")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_wst0f"), SubResource("Resource_2d24i"), SubResource("Resource_idwnn")])
+
+[sub_resource type="Resource" id="Resource_2r6m6"]
+script = ExtResource("8_apj4c")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_wst0f"), SubResource("Resource_2d24i"), SubResource("Resource_idwnn")])
+
+[node name="Propulsion" type="Node2D"]
+script = ExtResource("1_nmxp2")
+
+[node name="PropulsionStateChart" type="Node" parent="."]
+script = ExtResource("2_61vd3")
+
+[node name="Root" type="Node" parent="PropulsionStateChart"]
+script = ExtResource("3_pm1y1")
+
+[node name="Activity" type="Node" parent="PropulsionStateChart/Root"]
+script = ExtResource("4_0a7o8")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="PropulsionStateChart/Root/Activity"]
+script = ExtResource("5_cixm3")
+
+[node name="On Rotate" type="Node" parent="PropulsionStateChart/Root/Activity/Idle"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Rotating")
+event = &"rotate"
+guard = SubResource("Resource_q8vfd")
+
+[node name="On Move" type="Node" parent="PropulsionStateChart/Root/Activity/Idle"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Moving")
+event = &"move"
+guard = SubResource("Resource_2r6m6")
+
+[node name="Moving" type="Node" parent="PropulsionStateChart/Root/Activity"]
+script = ExtResource("5_cixm3")
+
+[node name="On Rotate" type="Node" parent="PropulsionStateChart/Root/Activity/Moving"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Rotating")
+event = &"rotate"
+
+[node name="On Stop" type="Node" parent="PropulsionStateChart/Root/Activity/Moving"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Idle")
+event = &"stop"
+
+[node name="Rotating" type="Node" parent="PropulsionStateChart/Root/Activity"]
+script = ExtResource("5_cixm3")
+
+[node name="On Move" type="Node" parent="PropulsionStateChart/Root/Activity/Rotating"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Moving")
+event = &"move"
+
+[node name="On Stop" type="Node" parent="PropulsionStateChart/Root/Activity/Rotating"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Idle")
+event = &"stop"
+
+[node name="Crew" type="Node" parent="PropulsionStateChart/Root"]
+script = ExtResource("4_0a7o8")
+initial_state = NodePath("Crew Enabled")
+
+[node name="Crew Enabled" type="Node" parent="PropulsionStateChart/Root/Crew"]
+script = ExtResource("5_cixm3")
+
+[node name="On Crew Disabled" type="Node" parent="PropulsionStateChart/Root/Crew/Crew Enabled"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Crew Disabled")
+event = &"crew disabled"
+
+[node name="Crew Disabled" type="Node" parent="PropulsionStateChart/Root/Crew"]
+script = ExtResource("5_cixm3")
+
+[node name="On Crew Enabled" type="Node" parent="PropulsionStateChart/Root/Crew/Crew Disabled"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Crew Enabled")
+event = &"crew enabled"
+
+[node name="Fuel" type="Node" parent="PropulsionStateChart/Root"]
+script = ExtResource("4_0a7o8")
+initial_state = NodePath("Fuel Present")
+
+[node name="Fuel Present" type="Node" parent="PropulsionStateChart/Root/Fuel"]
+script = ExtResource("5_cixm3")
+
+[node name="On Fuel Exhausted" type="Node" parent="PropulsionStateChart/Root/Fuel/Fuel Present"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Fuel Absent")
+event = &"fuel exhausted"
+
+[node name="Fuel Absent" type="Node" parent="PropulsionStateChart/Root/Fuel"]
+script = ExtResource("5_cixm3")
+
+[node name="On Fuel Reilled" type="Node" parent="PropulsionStateChart/Root/Fuel/Fuel Absent"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Fuel Present")
+event = &"fuel refilled"
+
+[node name="Damage" type="Node" parent="PropulsionStateChart/Root"]
+script = ExtResource("4_0a7o8")
+initial_state = NodePath("Not Damaged")
+
+[node name="Not Damaged" type="Node" parent="PropulsionStateChart/Root/Damage"]
+script = ExtResource("5_cixm3")
+
+[node name="On Damaged" type="Node" parent="PropulsionStateChart/Root/Damage/Not Damaged"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Damaged")
+event = &"Damaged"
+
+[node name="Damaged" type="Node" parent="PropulsionStateChart/Root/Damage"]
+script = ExtResource("5_cixm3")
+
+[node name="On Repaired" type="Node" parent="PropulsionStateChart/Root/Damage/Damaged"]
+script = ExtResource("6_l6gn5")
+to = NodePath("../../Not Damaged")
+event = &"Repaired"
+
+[connection signal="state_physics_processing" from="PropulsionStateChart/Root/Activity/Moving" to="." method="_on_moving_state_physics_processing"]
+[connection signal="state_physics_processing" from="PropulsionStateChart/Root/Activity/Rotating" to="." method="_on_rotating_state_physics_processing"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgorxoiifvsl8"]
+
+[ext_resource type="Script" path="res://objects/Depot.gd" id="1_3gvat"]
+[ext_resource type="PackedScene" uid="uid://bnl0np31yvnv3" path="res://unit_modules/cargo.tscn" id="2_d4sad"]
+[ext_resource type="Texture2D" uid="uid://6ih566b6eomy" path="res://assets/custom/supply_depot.png" id="3_4jooh"]
+[ext_resource type="PackedScene" uid="uid://dlkudvc68c5hh" path="res://UI/supplier_ui.tscn" id="4_nqfqi"]
+[ext_resource type="Texture2D" uid="uid://w6twqiw1tx67" path="res://assets/custom/warehouse_icon.png" id="5_npt58"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krf6m"]
+size = Vector2(478, 478)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vg5uh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.466667, 0.862745, 1, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohqop"]
+bg_color = Color(0.513726, 0.752941, 0, 0.513726)
+
+[node name="Depot" type="StaticBody2D"]
+script = ExtResource("1_3gvat")
+
+[node name="Modules" type="Node2D" parent="."]
+
+[node name="Cargo" parent="Modules" instance=ExtResource("2_d4sad")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 6)
+shape = SubResource("RectangleShape2D_krf6m")
+
+[node name="SupplyDepot" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+texture = ExtResource("3_4jooh")
+
+[node name="SupplierUI" parent="." instance=ExtResource("4_nqfqi")]
+visible = false
+offset_left = 2.0
+offset_top = -236.0
+offset_right = 2.0
+offset_bottom = -236.0
+
+[node name="Box" type="Panel" parent="."]
+offset_left = -262.0
+offset_top = -264.0
+offset_right = 263.0
+offset_bottom = 259.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vg5uh")
+
+[node name="Box2" type="Panel" parent="."]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 248.0
+offset_bottom = 248.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ohqop")
+
+[node name="WarehouseIcon" type="Sprite2D" parent="."]
+texture = ExtResource("5_npt58")
+
+[node name="BuildTimer" type="Timer" parent="."]
+
+[node name="BuildingProgress" type="ProgressBar" parent="."]
+offset_left = -80.0
+offset_top = -320.0
+offset_right = 80.0
+offset_bottom = -293.0
+
+[connection signal="timeout" from="BuildTimer" to="." method="_on_build_timer_timeout"]

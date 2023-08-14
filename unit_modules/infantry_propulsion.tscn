@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://jquj45snkyyx"]
+
+[ext_resource type="Script" path="res://unit_modules/infantry_propulsion.gd" id="1_a1v8k"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_6pbif"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_siyuq"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_befbi"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_7llex"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_o5beb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="7_v4vqn"]
+
+[sub_resource type="Resource" id="Resource_7s6ur"]
+script = ExtResource("7_v4vqn")
+state = NodePath("../../../Damage/Not Damaged")
+
+[sub_resource type="Resource" id="Resource_rvwsv"]
+script = ExtResource("7_v4vqn")
+state = NodePath("../../../Damage/Not Damaged")
+
+[node name="InfantryPropulsion" type="Node2D"]
+script = ExtResource("1_a1v8k")
+
+[node name="PropulsionStateChart" type="Node" parent="."]
+script = ExtResource("2_6pbif")
+
+[node name="Root" type="Node" parent="PropulsionStateChart"]
+script = ExtResource("3_siyuq")
+
+[node name="Activity" type="Node" parent="PropulsionStateChart/Root"]
+script = ExtResource("4_befbi")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="PropulsionStateChart/Root/Activity"]
+script = ExtResource("5_7llex")
+
+[node name="On Rotate" type="Node" parent="PropulsionStateChart/Root/Activity/Idle"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Rotating")
+event = &"rotate"
+guard = SubResource("Resource_7s6ur")
+
+[node name="On Move" type="Node" parent="PropulsionStateChart/Root/Activity/Idle"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Moving")
+event = &"move"
+guard = SubResource("Resource_rvwsv")
+
+[node name="Moving" type="Node" parent="PropulsionStateChart/Root/Activity"]
+script = ExtResource("5_7llex")
+
+[node name="On Rotate" type="Node" parent="PropulsionStateChart/Root/Activity/Moving"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Rotating")
+event = &"rotate"
+
+[node name="On Stop" type="Node" parent="PropulsionStateChart/Root/Activity/Moving"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Idle")
+event = &"stop"
+
+[node name="Rotating" type="Node" parent="PropulsionStateChart/Root/Activity"]
+script = ExtResource("5_7llex")
+
+[node name="On Move" type="Node" parent="PropulsionStateChart/Root/Activity/Rotating"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Moving")
+event = &"move"
+
+[node name="On Stop" type="Node" parent="PropulsionStateChart/Root/Activity/Rotating"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Idle")
+event = &"stop"
+
+[node name="Damage" type="Node" parent="PropulsionStateChart/Root"]
+script = ExtResource("4_befbi")
+initial_state = NodePath("Not Damaged")
+
+[node name="Not Damaged" type="Node" parent="PropulsionStateChart/Root/Damage"]
+script = ExtResource("5_7llex")
+
+[node name="On Damaged" type="Node" parent="PropulsionStateChart/Root/Damage/Not Damaged"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Damaged")
+event = &"Damaged"
+
+[node name="Damaged" type="Node" parent="PropulsionStateChart/Root/Damage"]
+script = ExtResource("5_7llex")
+
+[node name="On Repaired" type="Node" parent="PropulsionStateChart/Root/Damage/Damaged"]
+script = ExtResource("6_o5beb")
+to = NodePath("../../Not Damaged")
+event = &"Repaired"
+
+[connection signal="state_physics_processing" from="PropulsionStateChart/Root/Activity/Moving" to="." method="_on_moving_state_physics_processing"]
+[connection signal="state_physics_processing" from="PropulsionStateChart/Root/Activity/Rotating" to="." method="_on_rotating_state_physics_processing"]

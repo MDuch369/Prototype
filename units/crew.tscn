@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://clxq68d5k6akr"]
+
+[ext_resource type="Script" path="res://units/infantry.gd" id="1_b2l5q"]
+[ext_resource type="Texture2D" uid="uid://bjk4151vaieyi" path="res://assets/custom/units/crew.png" id="2_a22k4"]
+[ext_resource type="Script" path="res://units/soldier_modules.gd" id="3_dgir0"]
+[ext_resource type="PackedScene" uid="uid://c15lmpxlj24we" path="res://unit_modules/propulsion.tscn" id="4_wug6g"]
+[ext_resource type="Script" path="res://unit_modules/legs.gd" id="5_rtqqe"]
+[ext_resource type="Script" path="res://unit_modules/rifle.gd" id="6_il7wv"]
+[ext_resource type="PackedScene" uid="uid://cpfdas1ag58bt" path="res://unit_modules/weapon.tscn" id="6_iyyn4"]
+[ext_resource type="Script" path="res://units/Orders.gd" id="9_h4fxn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y87cj"]
+radius = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3erde"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.466667, 0.862745, 1, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Animation" id="Animation_xm7xs"]
+resource_name = "walking"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrewBody:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhhkd"]
+_data = {
+"walk": SubResource("Animation_xm7xs")
+}
+
+[node name="Crew" type="CharacterBody2D"]
+script = ExtResource("1_b2l5q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y87cj")
+
+[node name="Box" type="Panel" parent="."]
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3erde")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xhhkd")
+}
+
+[node name="CrewBody" type="Sprite2D" parent="."]
+texture = ExtResource("2_a22k4")
+
+[node name="Modules" type="Node2D" parent="."]
+script = ExtResource("3_dgir0")
+
+[node name="Legs" parent="Modules" instance=ExtResource("4_wug6g")]
+script = ExtResource("5_rtqqe")
+
+[node name="Rifle" parent="Modules" instance=ExtResource("6_iyyn4")]
+script = ExtResource("6_il7wv")
+
+[node name="Orders" type="Node" parent="."]
+script = ExtResource("9_h4fxn")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+avoidance_enabled = true
+radius = 5.0
+neighbor_distance = 50.0
+debug_enabled = true

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cfjph5v756gg"]
+
+[node name="UnitCreator" type="Panel"]
+offset_right = 362.0
+offset_bottom = 222.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 30.0
+offset_right = 181.0
+offset_bottom = 53.0
+text = "Create Unit"
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 66.0
+offset_right = 118.0
+offset_bottom = 99.0
+item_count = 2
+item_0/text = "truck"
+item_1/text = "tank"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 170.0
+offset_right = 218.0
+offset_bottom = 201.0
+text = "create"

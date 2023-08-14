@@ -1,0 +1,425 @@
+[gd_scene load_steps=19 format=3 uid="uid://bqcxibik7qls3"]
+
+[ext_resource type="Script" path="res://Global/world.gd" id="1_ljdj8"]
+[ext_resource type="Script" path="res://Global/Camera.gd" id="2_hb84s"]
+[ext_resource type="PackedScene" uid="uid://bwxc3ilygjnwn" path="res://UI/ui.tscn" id="3_nbc04"]
+[ext_resource type="Texture2D" uid="uid://5o1yv1k4dsn0" path="res://assets/non_custom/MiniWorldSprites/Ground/DeadGrass.png" id="5_yjkr2"]
+[ext_resource type="Texture2D" uid="uid://q7iuwxyvpc0o" path="res://assets/custom/objects/debug_marker.png" id="6_k0fye"]
+[ext_resource type="PackedScene" uid="uid://c5smnenqltf5o" path="res://objects/capture_point.tscn" id="6_vmjgm"]
+[ext_resource type="PackedScene" uid="uid://dot08rojo28nq" path="res://debug/debug_target.tscn" id="7_0mv6e"]
+[ext_resource type="Script" path="res://Global/DirectionCursor.gd" id="8_rpfff"]
+[ext_resource type="Texture2D" uid="uid://dvowmrgo8gvjw" path="res://assets/custom/cursors/cursor_direction.png" id="10_0212a"]
+[ext_resource type="PackedScene" uid="uid://blgk2vvvf6x6q" path="res://units/IFV.tscn" id="10_b87mm"]
+[ext_resource type="Texture2D" uid="uid://crdmmpskkyw38" path="res://assets/non_custom/Free SciFi Inventory/Inventory Boxes/scifi_inventory01_box_back.png" id="11_1cuk3"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="12_hbn34"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="13_aetmy"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="14_usq8t"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="15_1uyhn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="16_wm8gv"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="17_tmcsg"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_neowx"]
+vertices = PackedVector2Array(864, -1231, 1416, 433, 864, 433, 608, -703, -256, -1207, -192, 481, 360, 441)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(5, 3, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-192, 481, 360, 441, 608, -703, 864, 433, 1416, 433, 864, -1231, -256, -1207)])
+
+[node name="World" type="Node2D"]
+position = Vector2(0, -2)
+script = ExtResource("1_ljdj8")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(0, 2)
+script = ExtResource("2_hb84s")
+SPEED = 30.0
+
+[node name="UI" parent="." instance=ExtResource("3_nbc04")]
+
+[node name="StateChartDebugger" parent="UI" instance=ExtResource("12_hbn34")]
+offset_left = 768.0
+offset_top = 104.0
+offset_bottom = -200.0
+initial_node_to_watch = NodePath("../../Units/IFV")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -3432.0
+offset_top = -3454.0
+offset_right = 3448.0
+offset_bottom = 3474.0
+texture = ExtResource("5_yjkr2")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+position = Vector2(0, 1)
+navigation_polygon = SubResource("NavigationPolygon_neowx")
+
+[node name="DebugMarker" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+texture = ExtResource("6_k0fye")
+
+[node name="Objects" type="Node2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="CapturePoint" parent="Objects" instance=ExtResource("6_vmjgm")]
+visible = false
+position = Vector2(624, 322)
+
+[node name="Units" type="Node2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="DebugTarget" parent="Units" instance=ExtResource("7_0mv6e")]
+position = Vector2(592, 320)
+
+[node name="DebugTarget2" parent="Units" instance=ExtResource("7_0mv6e")]
+position = Vector2(392, 320)
+
+[node name="IFV" parent="Units" instance=ExtResource("10_b87mm")]
+
+[node name="MinimapLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="MinimapLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Minimap" type="MarginContainer" parent="MinimapLayer/Control"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="Frame" type="NinePatchRect" parent="MinimapLayer/Control/Minimap"]
+layout_mode = 2
+texture = ExtResource("11_1cuk3")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="DirectionCursor" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("10_0212a")
+script = ExtResource("8_rpfff")
+
+[node name="UnitSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="ResourceTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("13_aetmy")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("14_usq8t")
+
+[node name="Selected Units" type="Node" parent="StateChart/Root"]
+script = ExtResource("14_usq8t")
+
+[node name="Combat" type="Node" parent="StateChart/Root/Selected Units"]
+script = ExtResource("15_1uyhn")
+initial_state = NodePath("No")
+
+[node name="No" type="Node" parent="StateChart/Root/Selected Units/Combat"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Combatant Selected" type="Node" parent="StateChart/Root/Selected Units/Combat/No"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Yes")
+event = &"combatant selected"
+
+[node name="Yes" type="Node" parent="StateChart/Root/Selected Units/Combat"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Deselected" type="Node" parent="StateChart/Root/Selected Units/Combat/Yes"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../No")
+event = &"Deselect"
+
+[node name="Transportable" type="Node" parent="StateChart/Root/Selected Units"]
+script = ExtResource("15_1uyhn")
+initial_state = NodePath("No")
+
+[node name="No" type="Node" parent="StateChart/Root/Selected Units/Transportable"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Transportable Selected" type="Node" parent="StateChart/Root/Selected Units/Transportable/No"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Yes")
+event = &"transportable selected"
+
+[node name="Yes" type="Node" parent="StateChart/Root/Selected Units/Transportable"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Deselected" type="Node" parent="StateChart/Root/Selected Units/Transportable/Yes"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../No")
+event = &"Deselect"
+
+[node name="Supplier" type="Node" parent="StateChart/Root/Selected Units"]
+script = ExtResource("15_1uyhn")
+initial_state = NodePath("No")
+
+[node name="No" type="Node" parent="StateChart/Root/Selected Units/Supplier"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Supplier Selected" type="Node" parent="StateChart/Root/Selected Units/Supplier/No"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Yes")
+event = &"supplier selected"
+
+[node name="Yes" type="Node" parent="StateChart/Root/Selected Units/Supplier"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Deselected" type="Node" parent="StateChart/Root/Selected Units/Supplier/Yes"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../No")
+event = &"Deselect"
+
+[node name="Mobile" type="Node" parent="StateChart/Root/Selected Units"]
+script = ExtResource("15_1uyhn")
+initial_state = NodePath("No")
+
+[node name="No" type="Node" parent="StateChart/Root/Selected Units/Mobile"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Mobile Selected" type="Node" parent="StateChart/Root/Selected Units/Mobile/No"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Yes")
+event = &"mobile selected"
+
+[node name="Yes" type="Node" parent="StateChart/Root/Selected Units/Mobile"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Deselected" type="Node" parent="StateChart/Root/Selected Units/Mobile/Yes"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../No")
+event = &"Deselect"
+
+[node name="Hovering" type="Node" parent="StateChart/Root"]
+script = ExtResource("15_1uyhn")
+initial_state = NodePath("Nothing")
+
+[node name="Nothing" type="Node" parent="StateChart/Root/Hovering"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Not Selected" type="Node" parent="StateChart/Root/Hovering/Nothing"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Not Selected")
+event = &"mouse entered not selected"
+
+[node name="On Enemy" type="Node" parent="StateChart/Root/Hovering/Nothing"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Enemy")
+event = &"mouse entered enemy"
+
+[node name="On Embarkable" type="Node" parent="StateChart/Root/Hovering/Nothing"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Embarkable")
+event = &"mouse entered embarkable"
+
+[node name="On Supply Receiver" type="Node" parent="StateChart/Root/Hovering/Nothing"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Supply Receiver")
+event = &"supply receiver entered"
+
+[node name="Not Selected" type="Node" parent="StateChart/Root/Hovering"]
+script = ExtResource("16_wm8gv")
+
+[node name="Enemy" type="Node" parent="StateChart/Root/Hovering"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Mouse Exited" type="Node" parent="StateChart/Root/Hovering/Enemy"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Nothing")
+event = &"mouse exited"
+
+[node name="On Embarkable" type="Node" parent="StateChart/Root/Hovering/Enemy"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Embarkable")
+event = &"mouse entered embarkable"
+
+[node name="On Supply Receiver" type="Node" parent="StateChart/Root/Hovering/Enemy"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Supply Receiver")
+event = &"supply receiver entered"
+
+[node name="Embarkable" type="Node" parent="StateChart/Root/Hovering"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Mouse Exited" type="Node" parent="StateChart/Root/Hovering/Embarkable"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Nothing")
+event = &"mouse exited"
+
+[node name="On Enemy" type="Node" parent="StateChart/Root/Hovering/Embarkable"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Enemy")
+event = &"mouse entered enemy"
+
+[node name="On Supply Receiver" type="Node" parent="StateChart/Root/Hovering/Embarkable"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Supply Receiver")
+event = &"supply receiver entered"
+
+[node name="Supply Receiver" type="Node" parent="StateChart/Root/Hovering"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Mouse Exited" type="Node" parent="StateChart/Root/Hovering/Supply Receiver"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Nothing")
+event = &"mouse exited"
+
+[node name="On Enemy" type="Node" parent="StateChart/Root/Hovering/Supply Receiver"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Enemy")
+event = &"mouse entered enemy"
+
+[node name="On Embarkable" type="Node" parent="StateChart/Root/Hovering/Supply Receiver"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Embarkable")
+event = &"mouse entered embarkable"
+
+[node name="Cursor" type="Node" parent="StateChart/Root"]
+script = ExtResource("15_1uyhn")
+initial_state = NodePath("Default")
+
+[node name="Default" type="Node" parent="StateChart/Root/Cursor"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Select Cursor" type="Node" parent="StateChart/Root/Cursor/Default"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Select")
+event = &"select cursor"
+
+[node name="On Attack Cursor" type="Node" parent="StateChart/Root/Cursor/Default"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Attack")
+event = &"attack cursor"
+
+[node name="On Move Attack Cursor" type="Node" parent="StateChart/Root/Cursor/Default"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Move Attack")
+event = &"move attack cursor"
+
+[node name="On Embark Cursor" type="Node" parent="StateChart/Root/Cursor/Default"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Embark")
+event = &"embark cursor"
+
+[node name="On Supply Cursor" type="Node" parent="StateChart/Root/Cursor/Default"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Supply")
+event = &"supply cursor"
+
+[node name="Select" type="Node" parent="StateChart/Root/Cursor"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Default Cursor" type="Node" parent="StateChart/Root/Cursor/Select"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Default")
+event = &"default cursor"
+
+[node name="Attack" type="Node" parent="StateChart/Root/Cursor"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Default Cursor" type="Node" parent="StateChart/Root/Cursor/Attack"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Default")
+event = &"default cursor"
+
+[node name="Move Attack" type="Node" parent="StateChart/Root/Cursor"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Default Cursor" type="Node" parent="StateChart/Root/Cursor/Move Attack"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Default")
+event = &"default cursor"
+
+[node name="Embark" type="Node" parent="StateChart/Root/Cursor"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Default Cursor" type="Node" parent="StateChart/Root/Cursor/Embark"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Default")
+event = &"default cursor"
+
+[node name="Supply" type="Node" parent="StateChart/Root/Cursor"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Default Cursor" type="Node" parent="StateChart/Root/Cursor/Supply"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Default")
+event = &"default cursor"
+
+[node name="Order" type="Node" parent="StateChart/Root"]
+script = ExtResource("15_1uyhn")
+initial_state = NodePath("None")
+
+[node name="None" type="Node" parent="StateChart/Root/Order"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Move Order" type="Node" parent="StateChart/Root/Order/None"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Move")
+event = &"issue order"
+
+[node name="On Attack Order" type="Node" parent="StateChart/Root/Order/None"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Attack")
+event = &"issue order"
+
+[node name="On Embark Order" type="Node" parent="StateChart/Root/Order/None"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Supply")
+event = &"issue order"
+
+[node name="On Supply Order" type="Node" parent="StateChart/Root/Order/None"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../Supply")
+event = &"issue order"
+
+[node name="Move" type="Node" parent="StateChart/Root/Order"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Order Issued" type="Node" parent="StateChart/Root/Order/Move"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../None")
+event = &"order issued"
+
+[node name="Attack" type="Node" parent="StateChart/Root/Order"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Order Issued" type="Node" parent="StateChart/Root/Order/Attack"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../None")
+event = &"order issued"
+
+[node name="Embark" type="Node" parent="StateChart/Root/Order"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Order Issued" type="Node" parent="StateChart/Root/Order/Embark"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../None")
+event = &"order issued"
+
+[node name="Supply" type="Node" parent="StateChart/Root/Order"]
+script = ExtResource("16_wm8gv")
+
+[node name="On Order Issued" type="Node" parent="StateChart/Root/Order/Supply"]
+script = ExtResource("17_tmcsg")
+to = NodePath("../../None")
+event = &"order issued"
+
+[connection signal="selected_unit" from="." to="UI" method="_on_world_selected_unit"]
+[connection signal="unit_list_empty" from="." to="UI" method="_on_world_unit_list_empty"]
+[connection signal="timeout" from="ResourceTimer" to="." method="_on_resource_timer_timeout"]
+[connection signal="state_entered" from="StateChart/Root/Cursor/Default" to="." method="_on_default_cursor_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Cursor/Select" to="." method="_on_select_cursor_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Cursor/Attack" to="." method="_on_attack_cursor_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Cursor/Move Attack" to="." method="_on_move_attack_cursor_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Cursor/Embark" to="." method="_on_embark_cursor_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Cursor/Supply" to="." method="_on_supply_cursor_state_entered"]

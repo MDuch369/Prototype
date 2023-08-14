@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://0a15bh7kbfia"]
+
+[ext_resource type="Texture2D" uid="uid://devhh64w0gm7y" path="res://assets/custom/objects/gunfire_anim.png" id="1_u4k2m"]
+
+[sub_resource type="Animation" id="Animation_4o5uf"]
+resource_name = "gunfire"
+length = 0.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_w5tdr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4dlu2"]
+_data = {
+"RESET": SubResource("Animation_w5tdr"),
+"gunfire": SubResource("Animation_4o5uf")
+}
+
+[node name="GunfireAnim" type="Sprite2D"]
+position = Vector2(-2, 0)
+texture = ExtResource("1_u4k2m")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4dlu2")
+}

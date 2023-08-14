@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://dluxg6v1gggev"]
+
+[ext_resource type="Script" path="res://units/infantry.gd" id="1_ldd10"]
+[ext_resource type="Texture2D" uid="uid://cmovrvdi2jfim" path="res://assets/custom/units/soldier_walking.png" id="2_u8sgh"]
+[ext_resource type="Script" path="res://units/soldier_modules.gd" id="3_4gc0f"]
+[ext_resource type="Script" path="res://units/Orders.gd" id="3_owqmw"]
+[ext_resource type="Script" path="res://unit_modules/legs.gd" id="4_0lh6u"]
+[ext_resource type="PackedScene" uid="uid://jquj45snkyyx" path="res://unit_modules/infantry_propulsion.tscn" id="4_c18rj"]
+[ext_resource type="Script" path="res://unit_modules/rifle.gd" id="6_6hkcw"]
+[ext_resource type="PackedScene" uid="uid://cpfdas1ag58bt" path="res://unit_modules/weapon.tscn" id="6_cm3vx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y87cj"]
+radius = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3erde"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.466667, 0.862745, 1, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Animation" id="Animation_xm7xs"]
+resource_name = "walking"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoldierWalking:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhhkd"]
+_data = {
+"walk": SubResource("Animation_xm7xs")
+}
+
+[node name="Soldier" type="CharacterBody2D"]
+script = ExtResource("1_ldd10")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y87cj")
+
+[node name="Box" type="Panel" parent="."]
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3erde")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xhhkd")
+}
+
+[node name="SoldierWalking" type="Sprite2D" parent="."]
+texture = ExtResource("2_u8sgh")
+hframes = 3
+
+[node name="Modules" type="Node2D" parent="."]
+script = ExtResource("3_4gc0f")
+
+[node name="Legs" parent="Modules" instance=ExtResource("4_c18rj")]
+script = ExtResource("4_0lh6u")
+
+[node name="Rifle" parent="Modules" instance=ExtResource("6_cm3vx")]
+script = ExtResource("6_6hkcw")
+
+[node name="Orders" type="Node" parent="."]
+script = ExtResource("3_owqmw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+avoidance_enabled = true
+radius = 5.0
+neighbor_distance = 50.0
+debug_enabled = true

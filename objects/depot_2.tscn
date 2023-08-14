@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://chf87sv1kvw0h"]
+
+[ext_resource type="Script" path="res://objects/Depot.gd" id="1_7ybh8"]
+[ext_resource type="PackedScene" uid="uid://bnl0np31yvnv3" path="res://unit_modules/cargo.tscn" id="2_r0paw"]
+[ext_resource type="Texture2D" uid="uid://6ih566b6eomy" path="res://assets/custom/units/supply_depot.png" id="3_d8ohh"]
+[ext_resource type="PackedScene" uid="uid://dlkudvc68c5hh" path="res://UI/supplier_ui.tscn" id="4_httvv"]
+[ext_resource type="PackedScene" uid="uid://c5ku80ie3q5ua" path="res://resources/unit_resource.tscn" id="5_j26xl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krf6m"]
+size = Vector2(478, 478)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vg5uh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.466667, 0.862745, 1, 1)
+border_blend = true
+
+[node name="Depot2" type="StaticBody2D"]
+script = ExtResource("1_7ybh8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 6)
+shape = SubResource("RectangleShape2D_krf6m")
+
+[node name="Supplier" parent="." instance=ExtResource("2_r0paw")]
+
+[node name="SupplyDepot" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+texture = ExtResource("3_d8ohh")
+
+[node name="SupplierUI" parent="." instance=ExtResource("4_httvv")]
+offset_left = 2.0
+offset_top = -236.0
+offset_right = 2.0
+offset_bottom = -236.0
+
+[node name="Modules" type="Node" parent="."]
+
+[node name="Supplies" parent="Modules" instance=ExtResource("5_j26xl")]
+type = "supplies"
+max_capacity = 3000
+
+[node name="Box" type="Panel" parent="."]
+offset_left = -262.0
+offset_top = -264.0
+offset_right = 263.0
+offset_bottom = 259.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vg5uh")

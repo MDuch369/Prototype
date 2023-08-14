@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnl0np31yvnv3"]
+
+[ext_resource type="Script" path="res://unit_modules/cargo.gd" id="1_bet6c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onkxm"]
+radius = 100.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8o45"]
+bg_color = Color(0.705882, 0.470588, 0.0392157, 0.380392)
+corner_radius_top_left = 400
+corner_radius_top_right = 400
+corner_radius_bottom_right = 400
+corner_radius_bottom_left = 400
+
+[node name="Cargo" type="Node2D"]
+script = ExtResource("1_bet6c")
+
+[node name="SupplyArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SupplyArea"]
+shape = SubResource("CircleShape2D_onkxm")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SupplyRange" type="Panel" parent="."]
+offset_left = -399.0
+offset_top = -401.0
+offset_right = 401.0
+offset_bottom = 399.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u8o45")
+
+[node name="TransferList" type="Node" parent="."]
+
+[connection signal="body_entered" from="SupplyArea" to="." method="_on_supply_area_body_entered"]
+[connection signal="body_exited" from="SupplyArea" to="." method="_on_supply_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

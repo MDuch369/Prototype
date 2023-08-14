@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlkudvc68c5hh"]
+
+[ext_resource type="Script" path="res://UI/supplier_ui.gd" id="1_7gncy"]
+[ext_resource type="Texture2D" uid="uid://c28lpw3aj13jw" path="res://assets/custom/icons/supply.png" id="2_51omo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23fbe"]
+bg_color = Color(0.705882, 0.470588, 0.0392157, 1)
+
+[node name="SupplierUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7gncy")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -54.0
+offset_right = 76.0
+offset_bottom = -34.0
+
+[node name="supplies" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = -77.0
+offset_top = -47.0
+offset_right = 72.0
+offset_bottom = -41.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_23fbe")
+value = 50.0
+show_percentage = false
+
+[node name="Supply" type="Sprite2D" parent="."]
+position = Vector2(-90, -44)
+texture = ExtResource("2_51omo")

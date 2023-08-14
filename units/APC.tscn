@@ -1,0 +1,106 @@
+[gd_scene load_steps=16 format=3 uid="uid://4838581dlios"]
+
+[ext_resource type="Script" path="res://units/APC.gd" id="1_fyt82"]
+[ext_resource type="Texture2D" uid="uid://b11ah24om38ub" path="res://assets/custom/units/APC.png" id="1_yw6fd"]
+[ext_resource type="PackedScene" uid="uid://c15lmpxlj24we" path="res://unit_modules/propulsion.tscn" id="2_xihgf"]
+[ext_resource type="Script" path="res://unit_modules/apc_modules.gd" id="3_4h6rt"]
+[ext_resource type="Texture2D" uid="uid://ulj57liwy45e" path="res://assets/custom/smoke_big.png" id="3_427mk"]
+[ext_resource type="Script" path="res://unit_modules/wheels.gd" id="3_oxr8m"]
+[ext_resource type="Script" path="res://units/Orders.gd" id="4_kpomf"]
+[ext_resource type="Script" path="res://unit_modules/MachineGun.gd" id="4_lkxds"]
+[ext_resource type="Texture2D" uid="uid://c52id2lr8y5s8" path="res://assets/custom/units/APC_turret.png" id="5_supq1"]
+[ext_resource type="Texture2D" uid="uid://bwneb14bstfpb" path="res://assets/custom/mg_fire.png" id="6_i472a"]
+[ext_resource type="Script" path="res://unit_modules/transport.gd" id="8_n2flr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubdso"]
+size = Vector2(144, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jnexp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.466667, 0.862745, 1, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Animation" id="Animation_o1igj"]
+resource_name = "tank_fire"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38qsv"]
+_data = {
+"tank_fire": SubResource("Animation_o1igj")
+}
+
+[node name="APC" type="CharacterBody2D"]
+script = ExtResource("1_fyt82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_ubdso")
+
+[node name="Box" type="Panel" parent="."]
+offset_left = -80.0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jnexp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Modules/MachineGun/TankTurret/TankFire")
+libraries = {
+"": SubResource("AnimationLibrary_38qsv")
+}
+
+[node name="APCBody" type="Sprite2D" parent="."]
+texture = ExtResource("1_yw6fd")
+
+[node name="Modules" type="Node2D" parent="."]
+script = ExtResource("3_4h6rt")
+
+[node name="Propulsion" parent="Modules" instance=ExtResource("2_xihgf")]
+script = ExtResource("3_oxr8m")
+
+[node name="MachineGun" type="Node2D" parent="Modules"]
+position = Vector2(6, 9)
+script = ExtResource("4_lkxds")
+
+[node name="TankTurret" type="Sprite2D" parent="Modules/MachineGun"]
+position = Vector2(-8, 0)
+scale = Vector2(1.01765, 1)
+texture = ExtResource("5_supq1")
+offset = Vector2(15, 0)
+
+[node name="TankFire" type="Sprite2D" parent="Modules/MachineGun/TankTurret"]
+position = Vector2(29.4797, 2)
+texture = ExtResource("6_i472a")
+offset = Vector2(8.26016, 0)
+hframes = 2
+
+[node name="Transport" type="Node2D" parent="Modules"]
+script = ExtResource("8_n2flr")
+
+[node name="SmokeBig" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-183, -5)
+texture = ExtResource("3_427mk")
+
+[node name="Orders" type="Node" parent="."]
+script = ExtResource("4_kpomf")

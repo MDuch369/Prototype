@@ -1,0 +1,1519 @@
+[gd_scene load_steps=75 format=3 uid="uid://bwxc3ilygjnwn"]
+
+[ext_resource type="Script" path="res://UI/ui.gd" id="1_fpkso"]
+[ext_resource type="Script" path="res://UI/UnitWindow.gd" id="2_nn8hi"]
+[ext_resource type="Texture2D" uid="uid://ks53uag2dyaj" path="res://assets/custom/icons/arrow_down.png" id="3_hv3vu"]
+[ext_resource type="Texture2D" uid="uid://d3ud2rruh00s1" path="res://assets/custom/icons/tact_unit_rect.png" id="4_wx3et"]
+[ext_resource type="Texture2D" uid="uid://dnvjghcpm3a1c" path="res://assets/custom/icons/icon_driving_wheel_medium_2.png" id="5_m2h46"]
+[ext_resource type="Texture2D" uid="uid://bqxi2y25qiqak" path="res://assets/custom/icons/icon_tank.png" id="5_rwyl0"]
+[ext_resource type="Texture2D" uid="uid://bkp41nngqrp5f" path="res://assets/custom/icons/icon_crew_medium.png" id="6_17e3t"]
+[ext_resource type="Texture2D" uid="uid://pjm7wysuji2m" path="res://assets/custom/icons/icon_star_medium.png" id="8_kd3qy"]
+[ext_resource type="Texture2D" uid="uid://jobvq7hdough" path="res://assets/custom/icons/icon_FCS_medium.png" id="9_dkdiu"]
+[ext_resource type="Texture2D" uid="uid://co64nsfe2vy2i" path="res://assets/custom/icons/icon_driving_wheel_medium_2_red.png" id="10_k3553"]
+[ext_resource type="Texture2D" uid="uid://bpo6klu5thqyr" path="res://assets/custom/icons/icon_autoloader_medium.png" id="10_x28ti"]
+[ext_resource type="Texture2D" uid="uid://gbiddwu3eube" path="res://assets/custom/icons/icon_star_medium_red.png" id="11_x3ckr"]
+[ext_resource type="Texture2D" uid="uid://cgao5fqoc5q2b" path="res://assets/custom/icons/icon_FCS_medium_red.png" id="12_3wa7e"]
+[ext_resource type="Script" path="res://UI/SpeedBar.gd" id="12_etp5r"]
+[ext_resource type="Texture2D" uid="uid://dnqfw23venx1q" path="res://assets/custom/icons/icon_autoloader_medium_red.png" id="13_rrer5"]
+[ext_resource type="Script" path="res://UI/Clock.gd" id="14_il1rr"]
+[ext_resource type="Texture2D" uid="uid://b87vudn35teje" path="res://assets/custom/icons/icon_human_medium.png" id="15_hfauw"]
+[ext_resource type="Texture2D" uid="uid://dfwjrr1njg1t3" path="res://assets/custom/icons/icon_seat_medium.png" id="16_hgt42"]
+[ext_resource type="Texture2D" uid="uid://dy3xdp0akjcce" path="res://assets/custom/icons/icon_passangers_20.png" id="17_maekp"]
+[ext_resource type="Texture2D" uid="uid://burk53p26pl4t" path="res://assets/custom/icons/icon_mental_relaxed_medium.png" id="18_gskmt"]
+[ext_resource type="Texture2D" uid="uid://dguxsx2vtpwcy" path="res://assets/custom/icons/icon_mental_focused_alt_medium.png" id="19_sfopf"]
+[ext_resource type="Texture2D" uid="uid://dxtxutryl157v" path="res://assets/custom/icons/icon_mental_nervous_medium.png" id="20_43ew8"]
+[ext_resource type="Texture2D" uid="uid://b0800i4j5475k" path="res://assets/custom/icons/icon_mental_stressed_medium.png" id="21_l5fx7"]
+[ext_resource type="Texture2D" uid="uid://rm60cmj1k36l" path="res://assets/custom/icons/icon_mental_panicked_medium.png" id="22_vev6g"]
+[ext_resource type="Texture2D" uid="uid://c7ksiap34ddkr" path="res://assets/custom/icons/icon_mental_medium.png" id="23_lfctp"]
+[ext_resource type="Texture2D" uid="uid://dmgd75k5t54fp" path="res://assets/custom/icons/icon_rank_medium.png" id="24_ec0sh"]
+[ext_resource type="Texture2D" uid="uid://sh22mswqt42e" path="res://assets/custom/icons/icon_rank_3_medium.png" id="25_6v1e1"]
+[ext_resource type="Texture2D" uid="uid://dghqyui35un4" path="res://assets/custom/icons/icon_rank_6_medium.png" id="26_0aycx"]
+[ext_resource type="Texture2D" uid="uid://brjtt7yqxryei" path="res://assets/custom/icons/icon_xp_medium.png" id="27_bdduk"]
+[ext_resource type="Texture2D" uid="uid://dqkc3tnvn7vck" path="res://assets/custom/icons/icon_ammo_tank_medium.png" id="28_ucp3x"]
+[ext_resource type="Texture2D" uid="uid://cy2wlgcvyfwhl" path="res://assets/custom/icons/icon_ammo_ac_medium.png" id="29_0q08x"]
+[ext_resource type="Texture2D" uid="uid://v4vuvfvabq43" path="res://assets/custom/icons/icon_ammo_mg_medium.png" id="30_iluol"]
+[ext_resource type="Texture2D" uid="uid://d2dikpqiqgpdo" path="res://assets/custom/icons/icon_fuel_medium.png" id="31_5ya2h"]
+[ext_resource type="Texture2D" uid="uid://cfylbikmc4opv" path="res://assets/custom/icons/icon_maint_medium.png" id="32_4qawb"]
+[ext_resource type="Texture2D" uid="uid://b55a225rbe8b3" path="res://assets/custom/icons/icon_damage_medium.png" id="33_1gyg6"]
+[ext_resource type="Texture2D" uid="uid://0gca2v2jisvm" path="res://assets/custom/icons/tread.png" id="34_31xeu"]
+[ext_resource type="Texture2D" uid="uid://bllgxk6w83ixv" path="res://assets/custom/icons/wrench.png" id="35_wppm0"]
+[ext_resource type="Texture2D" uid="uid://1bu32lxmbsit" path="res://assets/custom/cursors/cursor_movement.png" id="36_ixlrq"]
+[ext_resource type="Texture2D" uid="uid://cpyyol3onf3i5" path="res://assets/custom/icons/icon_driving_wheel_medium.png" id="36_mkq45"]
+[ext_resource type="Texture2D" uid="uid://cj4uy73gy8xxf" path="res://assets/custom/icons/icon_optics_medium.png" id="37_0ilgl"]
+[ext_resource type="Texture2D" uid="uid://1pvvjpty06t8" path="res://assets/custom/cursors/cursor_attack.png" id="37_fl1pk"]
+[ext_resource type="Texture2D" uid="uid://b8e1up3h4dlff" path="res://assets/custom/cursors/cursor_resupply.png" id="38_4ugxa"]
+[ext_resource type="Texture2D" uid="uid://d0hlhbe56my8y" path="res://assets/custom/icons/icon_ammo_mag_medium.png" id="38_q3qkn"]
+[ext_resource type="Texture2D" uid="uid://6siwtinlpuak" path="res://assets/custom/icons/icon_cargo_medium.png" id="39_xvxht"]
+[ext_resource type="Texture2D" uid="uid://bm707vpqcwfc0" path="res://assets/custom/icons/arrow_up.png" id="40_sg8tu"]
+[ext_resource type="Script" path="res://UI/OrderWindow.gd" id="41_8dqi2"]
+[ext_resource type="Texture2D" uid="uid://bod0nbamuohfx" path="res://assets/custom/icons/separate_units_2.png" id="45_00ppo"]
+[ext_resource type="Texture2D" uid="uid://c2r6pcvjqtdau" path="res://assets/custom/cursors/no_action_cursor.png" id="45_t5muc"]
+[ext_resource type="Texture2D" uid="uid://eh8wc0a8e52j" path="res://assets/custom/icons/column_formation.png" id="46_u2cmk"]
+[ext_resource type="Texture2D" uid="uid://bnc1eyflmpd3c" path="res://assets/custom/icons/icon_driving_wheel_crew_out.png" id="47_ial3x"]
+[ext_resource type="Texture2D" uid="uid://npvnyfgh1byt" path="res://assets/custom/icons/line_formation.png" id="47_iaoqj"]
+[ext_resource type="Texture2D" uid="uid://c07n6jydate5m" path="res://assets/custom/icons/wedge_formation.png" id="48_cpqww"]
+[ext_resource type="Texture2D" uid="uid://doesbmoq5ed2f" path="res://assets/custom/icons/echelon_formation.png" id="49_kjukx"]
+[ext_resource type="Texture2D" uid="uid://doascidgviw02" path="res://assets/custom/icons/join_units.png" id="50_noh06"]
+[ext_resource type="Texture2D" uid="uid://k6jwwu4xrva2" path="res://assets/custom/icons/icon_warehouse_2.png" id="51_ijpdr"]
+[ext_resource type="Texture2D" uid="uid://b46mlibp4w1gl" path="res://assets/custom/icons/icon_tank_2.png" id="52_b38ij"]
+[ext_resource type="Texture2D" uid="uid://bauwr03ys1buc" path="res://assets/custom/icons/icon_disembark.png" id="52_pdtjd"]
+[ext_resource type="Texture2D" uid="uid://ca12c2mhr0t5u" path="res://assets/custom/icons/icon_truck_2.png" id="53_jtggl"]
+[ext_resource type="Texture2D" uid="uid://dn2x76h7n5usk" path="res://assets/custom/icons/speed.png" id="54_3xswq"]
+[ext_resource type="Texture2D" uid="uid://c552xgftytns8" path="res://assets/custom/icons/icon_infantry_2.png" id="54_tuxhg"]
+[ext_resource type="Texture2D" uid="uid://ka6fimlmu6ic" path="res://assets/custom/icons/icon_APC_2.png" id="55_sly2t"]
+[ext_resource type="Texture2D" uid="uid://cbfsd04gs4b5x" path="res://assets/custom/icons/icon_IFV_2.png" id="56_d3r0a"]
+[ext_resource type="Texture2D" uid="uid://c8aaqth50dgb8" path="res://assets/custom/icons/icon_time_speed.png" id="57_marn2"]
+[ext_resource type="Script" path="res://UI/UnitSpawn.gd" id="58_w7fml"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="62_mj4sa"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="63_tckrp"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="64_cesre"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="65_qmmvu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="66_sv67j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xipuh"]
+bg_color = Color(0.6, 0.6, 0.6, 0.117647)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.454902, 0.807843, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbh32"]
+bg_color = Color(0, 0.662745, 0.941176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_073ld"]
+bg_color = Color(0.878431, 0.32549, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2a5x"]
+bg_color = Color(0.913725, 0.654902, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p0el6"]
+bg_color = Color(0, 0.321569, 0.0352941, 1)
+
+[node name="UI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_fpkso")
+
+[node name="SelectionBox" type="Panel" parent="."]
+theme_override_styles/panel = SubResource("StyleBoxFlat_xipuh")
+
+[node name="Resources" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Resources"]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 32.0
+
+[node name="DeploymentLabel" type="Label" parent="Resources"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 256.0
+offset_bottom = 23.0
+
+[node name="SuppliesLabels" type="Label" parent="Resources"]
+layout_mode = 0
+offset_left = 272.0
+offset_right = 520.0
+offset_bottom = 26.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="UnitWindow" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -360.0
+offset_right = 200.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("2_nn8hi")
+metadata/_edit_lock_ = true
+
+[node name="PanelFull" type="Panel" parent="UnitWindow"]
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 360.0
+metadata/_edit_lock_ = true
+
+[node name="Fold" type="Button" parent="UnitWindow/PanelFull"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2
+anchor_right = -0.2
+offset_left = 192.0
+offset_top = 8.0
+offset_right = 232.0
+offset_bottom = 48.0
+tooltip_text = "Fold window"
+icon = ExtResource("3_hv3vu")
+
+[node name="TactUnitRect" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(32, 24)
+texture = ExtResource("4_wx3et")
+
+[node name="IconTank" type="Sprite2D" parent="UnitWindow/PanelFull/TactUnitRect"]
+texture = ExtResource("5_rwyl0")
+
+[node name="icon" type="Control" parent="UnitWindow/PanelFull"]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 40.0
+
+[node name="Id" type="Label" parent="UnitWindow/PanelFull"]
+visible = false
+layout_mode = 0
+offset_left = 64.0
+offset_top = 7.0
+offset_right = 104.0
+offset_bottom = 33.0
+text = "[ID]"
+
+[node name="DEPRECATED" type="Label" parent="UnitWindow/PanelFull"]
+visible = false
+layout_mode = 0
+offset_left = 200.0
+offset_top = 152.0
+offset_right = 312.0
+offset_bottom = 178.0
+text = "Weapon"
+
+[node name="DEPRECATED2" type="Label" parent="UnitWindow/PanelFull"]
+visible = false
+layout_mode = 0
+offset_left = 200.0
+offset_top = 120.0
+offset_right = 312.0
+offset_bottom = 146.0
+text = "Locomotion"
+
+[node name="Name" type="Label" parent="UnitWindow/PanelFull"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 89.0
+offset_bottom = 66.0
+text = "
+"
+
+[node name="Crew" type="Sprite2D" parent="UnitWindow/PanelFull"]
+visible = false
+position = Vector2(20, 100)
+texture = ExtResource("6_17e3t")
+
+[node name="Driver" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(32, 0)
+texture = ExtResource("5_m2h46")
+
+[node name="Commander" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(56, 0)
+texture = ExtResource("8_kd3qy")
+
+[node name="Gunner" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(80, 0)
+texture = ExtResource("9_dkdiu")
+
+[node name="Loader" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(104, 0)
+texture = ExtResource("10_x28ti")
+
+[node name="DriverRed" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(32, 0)
+texture = ExtResource("10_k3553")
+
+[node name="CommanderRed" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(56, 0)
+texture = ExtResource("11_x3ckr")
+
+[node name="GunnerRed" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(80, 0)
+texture = ExtResource("12_3wa7e")
+
+[node name="LoaderRed" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(104, 0)
+texture = ExtResource("13_rrer5")
+
+[node name="IconHumanMedium" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(26, 0)
+texture = ExtResource("15_hfauw")
+
+[node name="IconHumanMedium2" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(38, 0)
+texture = ExtResource("15_hfauw")
+
+[node name="IconHumanMedium3" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(50, 0)
+texture = ExtResource("15_hfauw")
+
+[node name="IconHumanMedium4" type="Sprite2D" parent="UnitWindow/PanelFull/Crew"]
+visible = false
+position = Vector2(62, 0)
+texture = ExtResource("15_hfauw")
+
+[node name="Passangers" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 148)
+texture = ExtResource("16_hgt42")
+
+[node name="IconPassangers20" type="Sprite2D" parent="UnitWindow/PanelFull/Passangers"]
+visible = false
+position = Vector2(140, 0)
+texture = ExtResource("17_maekp")
+
+[node name="PassangerNumber" type="Label" parent="UnitWindow/PanelFull/Passangers"]
+visible = false
+offset_left = 20.0
+offset_top = -12.0
+offset_right = 63.0
+offset_bottom = 14.0
+text = "xx/12"
+
+[node name="Mental" type="Control" parent="UnitWindow/PanelFull"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Relaxed" type="Sprite2D" parent="UnitWindow/PanelFull/Mental"]
+position = Vector2(20, 124)
+texture = ExtResource("18_gskmt")
+
+[node name="Focused" type="Sprite2D" parent="UnitWindow/PanelFull/Mental"]
+visible = false
+position = Vector2(20, 124)
+texture = ExtResource("19_sfopf")
+
+[node name="Nervous" type="Sprite2D" parent="UnitWindow/PanelFull/Mental"]
+visible = false
+position = Vector2(20, 124)
+texture = ExtResource("20_43ew8")
+
+[node name="Stressed" type="Sprite2D" parent="UnitWindow/PanelFull/Mental"]
+visible = false
+position = Vector2(20, 124)
+texture = ExtResource("21_l5fx7")
+
+[node name="Panicked" type="Sprite2D" parent="UnitWindow/PanelFull/Mental"]
+visible = false
+position = Vector2(20, 124)
+texture = ExtResource("22_vev6g")
+
+[node name="Suppresed" type="Sprite2D" parent="UnitWindow/PanelFull/Mental"]
+visible = false
+position = Vector2(20, 124)
+texture = ExtResource("23_lfctp")
+
+[node name="Rank" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(60, 124)
+texture = ExtResource("24_ec0sh")
+
+[node name="IconRank3Medium" type="Sprite2D" parent="UnitWindow/PanelFull/Rank"]
+visible = false
+position = Vector2(32, 0)
+texture = ExtResource("25_6v1e1")
+
+[node name="IconRank6Medium" type="Sprite2D" parent="UnitWindow/PanelFull/Rank"]
+visible = false
+position = Vector2(56, 0)
+texture = ExtResource("26_0aycx")
+
+[node name="XP" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 196)
+texture = ExtResource("27_bdduk")
+
+[node name="xp" type="ProgressBar" parent="UnitWindow/PanelFull/XP"]
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 169.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_vbh32")
+show_percentage = false
+
+[node name="AmmoTank" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 220)
+texture = ExtResource("28_ucp3x")
+
+[node name="ammo" type="ProgressBar" parent="UnitWindow/PanelFull/AmmoTank"]
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 169.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_073ld")
+show_percentage = false
+
+[node name="AmmoAC" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 244)
+texture = ExtResource("29_0q08x")
+
+[node name="ammo" type="ProgressBar" parent="UnitWindow/PanelFull/AmmoAC"]
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 169.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_073ld")
+value = 75.0
+show_percentage = false
+
+[node name="AmmoMG" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 268)
+texture = ExtResource("30_iluol")
+
+[node name="ammo" type="ProgressBar" parent="UnitWindow/PanelFull/AmmoMG"]
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 169.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_073ld")
+value = 75.0
+show_percentage = false
+
+[node name="Fuel" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 292)
+texture = ExtResource("31_5ya2h")
+
+[node name="fuel" type="ProgressBar" parent="UnitWindow/PanelFull/Fuel"]
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 169.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_v2a5x")
+show_percentage = false
+
+[node name="Maint" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 316)
+texture = ExtResource("32_4qawb")
+
+[node name="maint" type="ProgressBar" parent="UnitWindow/PanelFull/Maint"]
+offset_left = 20.0
+offset_top = -4.0
+offset_right = 169.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_p0el6")
+show_percentage = false
+
+[node name="Damage" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 340)
+texture = ExtResource("33_1gyg6")
+
+[node name="Tread" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+visible = false
+position = Vector2(139.5, 3.5)
+texture = ExtResource("34_31xeu")
+
+[node name="Wrench" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+visible = false
+position = Vector2(155.5, 3.5)
+texture = ExtResource("35_wppm0")
+
+[node name="IconFcsMedium" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+position = Vector2(32, 0)
+texture = ExtResource("9_dkdiu")
+
+[node name="IconDrivingWheelMedium" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+position = Vector2(56, 0)
+texture = ExtResource("36_mkq45")
+
+[node name="IconOpticsMedium" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+position = Vector2(80, 0)
+texture = ExtResource("37_0ilgl")
+
+[node name="IconCrewMedium" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+position = Vector2(104, 0)
+texture = ExtResource("6_17e3t")
+
+[node name="IconAmmoMagMedium" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+position = Vector2(128, 0)
+texture = ExtResource("38_q3qkn")
+
+[node name="IconAutoloaderMedium" type="Sprite2D" parent="UnitWindow/PanelFull/Damage"]
+position = Vector2(152, 0)
+texture = ExtResource("10_x28ti")
+
+[node name="IconCargoMedium" type="Sprite2D" parent="UnitWindow/PanelFull"]
+position = Vector2(20, 172)
+texture = ExtResource("39_xvxht")
+
+[node name="PanelFolded" type="Panel" parent="UnitWindow"]
+visible = false
+layout_mode = 0
+offset_top = 288.0
+offset_right = 200.0
+offset_bottom = 360.0
+metadata/_edit_lock_ = true
+
+[node name="Unfold" type="Button" parent="UnitWindow/PanelFolded"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2
+anchor_right = -0.2
+offset_left = 192.0
+offset_top = 8.0
+offset_right = 232.0
+offset_bottom = 48.0
+tooltip_text = "Fold window"
+icon = ExtResource("40_sg8tu")
+
+[node name="Id" type="Label" parent="UnitWindow/PanelFolded"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 7.0
+offset_right = 104.0
+offset_bottom = 33.0
+text = "[ID]"
+
+[node name="Name" type="Label" parent="UnitWindow/PanelFolded"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 89.0
+offset_bottom = 66.0
+text = "[? NAME ?]
+"
+
+[node name="TactUnitRect" type="Sprite2D" parent="UnitWindow/PanelFolded"]
+position = Vector2(32, 24)
+texture = ExtResource("4_wx3et")
+
+[node name="IconTank" type="Sprite2D" parent="UnitWindow/PanelFolded/TactUnitRect"]
+texture = ExtResource("5_rwyl0")
+
+[node name="PauseWindow" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="PauseWindow"]
+layout_mode = 0
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="PauseWindow"]
+layout_mode = 0
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 40.0
+text = "Game Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OrderWindow" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -136.0
+offset_right = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("41_8dqi2")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -321.0
+offset_top = -136.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Move" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -120.0
+offset_right = -152.0
+offset_bottom = -80.0
+icon = ExtResource("36_ixlrq")
+
+[node name="Attack" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -120.0
+offset_right = -104.0
+offset_bottom = -80.0
+icon = ExtResource("37_fl1pk")
+
+[node name="Supply" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -120.0
+offset_right = -56.0
+offset_bottom = -80.0
+icon = ExtResource("38_4ugxa")
+
+[node name="Stop" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -120.0
+offset_right = -9.0
+offset_bottom = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("45_t5muc")
+
+[node name="Label" type="Label" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -80.0
+offset_right = -106.0
+offset_bottom = -54.0
+text = "formations"
+
+[node name="Line" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -48.0
+offset_right = -152.0
+offset_bottom = -8.0
+icon = ExtResource("46_u2cmk")
+
+[node name="Button" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -48.0
+offset_right = -104.0
+offset_bottom = -8.0
+icon = ExtResource("47_iaoqj")
+
+[node name="Button2" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -48.0
+offset_right = -56.0
+offset_bottom = -8.0
+icon = ExtResource("48_cpqww")
+
+[node name="Button3" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = -8.0
+offset_bottom = -8.0
+icon = ExtResource("49_kjukx")
+
+[node name="JoinUnits" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -120.0
+offset_right = -216.0
+offset_bottom = -80.0
+icon = ExtResource("50_noh06")
+
+[node name="SeparateUnits" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.996226
+anchor_top = 1.0
+anchor_right = 0.996226
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -48.0
+offset_right = -216.0
+offset_bottom = -8.0
+icon = ExtResource("45_00ppo")
+
+[node name="Disembark" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -313.0
+offset_top = -120.0
+offset_right = -273.0
+offset_bottom = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("52_pdtjd")
+
+[node name="DisembarkCrew" type="Button" parent="OrderWindow"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -313.0
+offset_top = -48.0
+offset_right = -273.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("47_ial3x")
+
+[node name="TimeControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Panel" type="Panel" parent="TimeControls"]
+layout_mode = 0
+offset_left = -216.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="TimeControls"]
+layout_mode = 0
+offset_left = -96.0
+offset_top = 8.0
+offset_right = -43.0
+offset_bottom = 34.0
+text = "SPEED"
+
+[node name="SpeedBar" type="TextureProgressBar" parent="TimeControls"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 8.0
+offset_right = 32.0
+offset_bottom = 32.0
+max_value = 5.0
+value = 5.0
+texture_progress = ExtResource("54_3xswq")
+script = ExtResource("12_etp5r")
+
+[node name="Clock" type="Label" parent="TimeControls"]
+layout_mode = 0
+offset_left = -200.0
+offset_top = 8.0
+offset_right = -112.0
+offset_bottom = 32.0
+script = ExtResource("14_il1rr")
+
+[node name="Clock" type="Timer" parent="TimeControls/Clock"]
+autostart = true
+
+[node name="DebugTimeSpeed" type="Button" parent="TimeControls"]
+visible = false
+layout_mode = 0
+offset_left = -264.0
+offset_right = -224.0
+offset_bottom = 40.0
+icon = ExtResource("57_marn2")
+
+[node name="UnitSpawn" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("58_w7fml")
+
+[node name="PanelFull" type="Panel" parent="UnitSpawn"]
+visible = false
+layout_mode = 0
+offset_left = 200.0
+offset_top = -14.0
+offset_right = 556.0
+offset_bottom = 40.0
+
+[node name="Warehouse" type="Button" parent="UnitSpawn/PanelFull"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 6.0
+offset_right = 104.0
+offset_bottom = 46.0
+icon = ExtResource("51_ijpdr")
+
+[node name="Tank" type="Button" parent="UnitSpawn/PanelFull"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 6.0
+offset_right = 344.0
+offset_bottom = 46.0
+icon = ExtResource("52_b38ij")
+
+[node name="Truck" type="Button" parent="UnitSpawn/PanelFull"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 6.0
+offset_right = 152.0
+offset_bottom = 46.0
+icon = ExtResource("53_jtggl")
+
+[node name="Infantry" type="Button" parent="UnitSpawn/PanelFull"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 6.0
+offset_right = 200.0
+offset_bottom = 46.0
+icon = ExtResource("54_tuxhg")
+
+[node name="APC" type="Button" parent="UnitSpawn/PanelFull"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 6.0
+offset_right = 248.0
+offset_bottom = 46.0
+icon = ExtResource("55_sly2t")
+
+[node name="IFV" type="Button" parent="UnitSpawn/PanelFull"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 6.0
+offset_right = 296.0
+offset_bottom = 46.0
+icon = ExtResource("56_d3r0a")
+
+[node name="Fold" type="Button" parent="UnitSpawn/PanelFull"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2
+anchor_right = -0.2
+offset_left = 120.0
+offset_top = 6.0
+offset_right = 160.0
+offset_bottom = 46.0
+rotation = 1.5708
+tooltip_text = "Fold window"
+icon = ExtResource("3_hv3vu")
+
+[node name="PanelFolded" type="Panel" parent="UnitSpawn"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = -14.0
+offset_right = 256.0
+offset_bottom = 40.0
+
+[node name="Unfold" type="Button" parent="UnitSpawn/PanelFolded"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2
+anchor_right = -0.2
+offset_left = 19.2
+offset_top = 46.0
+offset_right = 59.2
+offset_bottom = 86.0
+rotation = 4.71239
+tooltip_text = "Fold window"
+icon = ExtResource("3_hv3vu")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("62_mj4sa")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("63_tckrp")
+
+[node name="UnitWindow" type="Node" parent="StateChart/Root"]
+script = ExtResource("63_tckrp")
+
+[node name="UnitWindowVisibility" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("UnitWindowHidden")
+
+[node name="UnitWindowHidden" type="Node" parent="StateChart/Root/UnitWindow/UnitWindowVisibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/UnitWindowVisibility/UnitWindowHidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../UnitWindowVisible")
+event = &"show unit window"
+
+[node name="UnitWindowVisible" type="Node" parent="StateChart/Root/UnitWindow/UnitWindowVisibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/UnitWindowVisibility/UnitWindowVisible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../UnitWindowHidden")
+event = &"hide unit window"
+
+[node name="Crew" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Crew"]
+script = ExtResource("63_tckrp")
+
+[node name="Driver" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Active")
+
+[node name="Active" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Disabled" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver/Visible/Active"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Inactive")
+event = &"disable driver"
+
+[node name="Inactive" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Enabled" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver/Visible/Inactive"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Active")
+event = &"enable driver"
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Hidden")
+event = &"hide driver"
+
+[node name="Hidden" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Driver/Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show driver"
+
+[node name="Gunner" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Active")
+
+[node name="Active" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Disabled" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Visible/Active"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Inactive")
+event = &"disable gunner"
+
+[node name="Inactive" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Enabled" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Visible/Inactive"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Active")
+event = &"enable gunner"
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Hidden")
+event = &"hide gunner"
+
+[node name="Hidden" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show gunner"
+
+[node name="Commander" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Active")
+
+[node name="Active" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Disabled" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander/Visible/Active"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Inactive")
+event = &"disable commander"
+
+[node name="Inactive" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Enabled" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander/Visible/Inactive"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Active")
+event = &"enable commander"
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Hidden")
+event = &"hide commander"
+
+[node name="Hidden" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible/Commander/Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show commander"
+
+[node name="On Hide Crew" type="Node" parent="StateChart/Root/UnitWindow/Crew/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide crew"
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Crew"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Crew" type="Node" parent="StateChart/Root/UnitWindow/Crew/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show crew"
+
+[node name="Mental" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Mental"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Relaxed")
+
+[node name="On Hide Mental" type="Node" parent="StateChart/Root/UnitWindow/Mental/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide mental"
+
+[node name="Relaxed" type="Node" parent="StateChart/Root/UnitWindow/Mental/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="Focused" type="Node" parent="StateChart/Root/UnitWindow/Mental/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="Nervous" type="Node" parent="StateChart/Root/UnitWindow/Mental/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="Stressed" type="Node" parent="StateChart/Root/UnitWindow/Mental/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="Panicked" type="Node" parent="StateChart/Root/UnitWindow/Mental/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Mental"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Mantal" type="Node" parent="StateChart/Root/UnitWindow/Mental/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show mental"
+
+[node name="Rank" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Rank"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Rank 0")
+
+[node name="On Hide Rank" type="Node" parent="StateChart/Root/UnitWindow/Rank/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide rank"
+
+[node name="Rank 0" type="Node" parent="StateChart/Root/UnitWindow/Rank/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Rank"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Rank" type="Node" parent="StateChart/Root/UnitWindow/Rank/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show rank"
+
+[node name="Passangers" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Passangers"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide Passangers" type="Node" parent="StateChart/Root/UnitWindow/Passangers/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide passangers"
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Passangers"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Passsangers" type="Node" parent="StateChart/Root/UnitWindow/Passangers/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show passangers"
+
+[node name="Cargo" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Cargo"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("[PLACEHOLDER]")
+
+[node name="On Hide Cargo" type="Node" parent="StateChart/Root/UnitWindow/Cargo/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide Cargo"
+
+[node name="[PLACEHOLDER]" type="Node" parent="StateChart/Root/UnitWindow/Cargo/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Cargo"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Cargo" type="Node" parent="StateChart/Root/UnitWindow/Cargo/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show cargo"
+
+[node name="XP" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Visible")
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/XP"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show XP" type="Node" parent="StateChart/Root/UnitWindow/XP/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show xp"
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/XP"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide XP" type="Node" parent="StateChart/Root/UnitWindow/XP/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide xp"
+
+[node name="Ammo" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Visible")
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Ammo"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Ammo" type="Node" parent="StateChart/Root/UnitWindow/Ammo/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show ammo"
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Ammo"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide Ammo" type="Node" parent="StateChart/Root/UnitWindow/Ammo/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide ammo"
+
+[node name="Maintenance" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Visible")
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Maintenance"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Maint" type="Node" parent="StateChart/Root/UnitWindow/Maintenance/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show maint"
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Maintenance"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide Maint" type="Node" parent="StateChart/Root/UnitWindow/Maintenance/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide maint"
+
+[node name="Damage" type="Node" parent="StateChart/Root/UnitWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Damage"]
+script = ExtResource("63_tckrp")
+
+[node name="On Hide Damage" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Visible")
+event = &"hide damage"
+
+[node name="Targeting" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Damaged")
+
+[node name="Not Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting/Visible/Not Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Damaged")
+event = &"targeting damaged"
+
+[node name="Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Repaired" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting/Visible/Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Damaged")
+event = &"targeting repaired"
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Hidden")
+event = &"hide targeting"
+
+[node name="Hidden" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Targeting/Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show targeting"
+
+[node name="Locomotion" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Damaged")
+
+[node name="Not Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion/Visible/Not Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Damaged")
+event = &"locomotion damaged"
+
+[node name="Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Repaired" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion/Visible/Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Damaged")
+event = &"locomotion repaired"
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Hidden")
+event = &"hide locomotion"
+
+[node name="Hidden" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Locomotion/Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show locomotion"
+
+[node name="Optics" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Damaged")
+
+[node name="Not Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics/Visible/Not Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Damaged")
+event = &"optics damaged"
+
+[node name="Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Repaired" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics/Visible/Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Damaged")
+event = &"optics repaired"
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Hidden")
+event = &"hide optics"
+
+[node name="Hidden" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Optics/Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show optics"
+
+[node name="Autoloader" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Visible")
+
+[node name="Visible" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Not Damaged")
+
+[node name="Not Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader/Visible/Not Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Damaged")
+event = &"autoloader damaged"
+
+[node name="Damaged" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader/Visible"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Repaired" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader/Visible/Damaged"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Not Damaged")
+event = &"autoloader repaired"
+
+[node name="On Hide" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader/Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Hidden")
+event = &"hide autoloader"
+
+[node name="Hidden" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show" type="Node" parent="StateChart/Root/UnitWindow/Damage/Visible/Autoloader/Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show autoloader"
+
+[node name="Not Visible" type="Node" parent="StateChart/Root/UnitWindow/Damage"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Damage" type="Node" parent="StateChart/Root/UnitWindow/Damage/Not Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Visible")
+event = &"show damage"
+
+[node name="OrderWindow" type="Node" parent="StateChart/Root"]
+script = ExtResource("63_tckrp")
+
+[node name="Order Window Visibility" type="Node" parent="StateChart/Root/OrderWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Order Window Hidden")
+
+[node name="Order Window Hidden" type="Node" parent="StateChart/Root/OrderWindow/Order Window Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Order Window" type="Node" parent="StateChart/Root/OrderWindow/Order Window Visibility/Order Window Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Order Window Visibile")
+event = &"show order window"
+
+[node name="Order Window Visibile" type="Node" parent="StateChart/Root/OrderWindow/Order Window Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide Order Window" type="Node" parent="StateChart/Root/OrderWindow/Order Window Visibility/Order Window Visibile"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Order Window Hidden")
+event = &"hide order window"
+
+[node name="Disembark Visibility" type="Node" parent="StateChart/Root/OrderWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Disembark Hidden")
+
+[node name="Disembark Hidden" type="Node" parent="StateChart/Root/OrderWindow/Disembark Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Disembark" type="Node" parent="StateChart/Root/OrderWindow/Disembark Visibility/Disembark Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Disembark Visibile")
+event = &"show disembark"
+
+[node name="Disembark Visibile" type="Node" parent="StateChart/Root/OrderWindow/Disembark Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide Disembark" type="Node" parent="StateChart/Root/OrderWindow/Disembark Visibility/Disembark Visibile"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Disembark Hidden")
+event = &"hide disembark"
+
+[node name="Join Units Visibility" type="Node" parent="StateChart/Root/OrderWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Join Units Hidden")
+
+[node name="Join Units Hidden" type="Node" parent="StateChart/Root/OrderWindow/Join Units Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Join Units" type="Node" parent="StateChart/Root/OrderWindow/Join Units Visibility/Join Units Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Join Units Visible")
+event = &"show join units"
+
+[node name="Join Units Visible" type="Node" parent="StateChart/Root/OrderWindow/Join Units Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide Join Units" type="Node" parent="StateChart/Root/OrderWindow/Join Units Visibility/Join Units Visible"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Join Units Hidden")
+event = &"hide join units"
+
+[node name="Seperate Units Visibility" type="Node" parent="StateChart/Root/OrderWindow"]
+script = ExtResource("64_cesre")
+initial_state = NodePath("Seperate Units Visibile")
+
+[node name="Seperate Units Visibile" type="Node" parent="StateChart/Root/OrderWindow/Seperate Units Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Hide Separate Units" type="Node" parent="StateChart/Root/OrderWindow/Seperate Units Visibility/Seperate Units Visibile"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Seperate Units Hidden")
+event = &"hide separate units"
+
+[node name="Seperate Units Hidden" type="Node" parent="StateChart/Root/OrderWindow/Seperate Units Visibility"]
+script = ExtResource("65_qmmvu")
+
+[node name="On Show Separate Units" type="Node" parent="StateChart/Root/OrderWindow/Seperate Units Visibility/Seperate Units Hidden"]
+script = ExtResource("66_sv67j")
+to = NodePath("../../Seperate Units Visibile")
+event = &"show separate units"
+
+[connection signal="pressed" from="UnitWindow/PanelFull/Fold" to="." method="_on_fold_pressed"]
+[connection signal="pressed" from="UnitWindow/PanelFolded/Unfold" to="." method="_on_unfold_pressed"]
+[connection signal="mouse_entered" from="OrderWindow/Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="OrderWindow/Panel" to="." method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="OrderWindow/JoinUnits" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="OrderWindow/JoinUnits" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="OrderWindow/JoinUnits" to="OrderWindow" method="_on_join_units_pressed"]
+[connection signal="mouse_entered" from="OrderWindow/SeparateUnits" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="OrderWindow/SeparateUnits" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="OrderWindow/SeparateUnits" to="OrderWindow" method="_on_separate_units_pressed"]
+[connection signal="mouse_entered" from="OrderWindow/Disembark" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="OrderWindow/Disembark" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="OrderWindow/Disembark" to="OrderWindow" method="_on_disembark_pressed"]
+[connection signal="mouse_entered" from="OrderWindow/DisembarkCrew" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="OrderWindow/DisembarkCrew" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="OrderWindow/DisembarkCrew" to="OrderWindow" method="_on_disembark_crew_pressed"]
+[connection signal="timeout" from="TimeControls/Clock/Clock" to="TimeControls/Clock" method="_on_clock_timeout"]
+[connection signal="pressed" from="TimeControls/DebugTimeSpeed" to="." method="_on_debug_time_speed_pressed"]
+[connection signal="mouse_entered" from="UnitSpawn/PanelFull/Warehouse" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="UnitSpawn/PanelFull/Warehouse" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="UnitSpawn/PanelFull/Warehouse" to="." method="_on_warehouse_pressed"]
+[connection signal="mouse_entered" from="UnitSpawn/PanelFull/Tank" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="UnitSpawn/PanelFull/Tank" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="UnitSpawn/PanelFull/Tank" to="." method="_on_tank_pressed"]
+[connection signal="mouse_entered" from="UnitSpawn/PanelFull/Truck" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="UnitSpawn/PanelFull/Truck" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="UnitSpawn/PanelFull/Truck" to="." method="_on_truck_pressed"]
+[connection signal="mouse_entered" from="UnitSpawn/PanelFull/Infantry" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="UnitSpawn/PanelFull/Infantry" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="UnitSpawn/PanelFull/Infantry" to="." method="_on_infantry_pressed"]
+[connection signal="mouse_entered" from="UnitSpawn/PanelFull/APC" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="UnitSpawn/PanelFull/APC" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="UnitSpawn/PanelFull/APC" to="." method="_on_apc_pressed"]
+[connection signal="pressed" from="UnitSpawn/PanelFull/Fold" to="UnitSpawn" method="_on_fold_pressed"]
+[connection signal="pressed" from="UnitSpawn/PanelFolded/Unfold" to="UnitSpawn" method="_on_unfold_pressed"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/UnitWindowVisibility/UnitWindowHidden" to="UnitWindow" method="_on_unit_window_hidden_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/UnitWindowVisibility/UnitWindowVisible" to="UnitWindow" method="_on_unit_window_visible_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Crew/Visible" to="UnitWindow" method="_on_crew_visible_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Crew/Visible/Driver/Visible/Active" to="UnitWindow" method="_on_driver_active_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Crew/Visible/Driver/Visible/Inactive" to="UnitWindow" method="_on_driver_inactive_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Visible/Active" to="UnitWindow" method="_on_gunner_active_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Crew/Visible/Gunner/Visible/Inactive" to="UnitWindow" method="_on_gunner_inactive_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Crew/Visible/Commander/Visible/Active" to="UnitWindow" method="_on_commander_active_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Crew/Visible/Commander/Visible/Inactive" to="UnitWindow" method="_on_commander_inactive_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Mental/Visible" to="UnitWindow" method="_on_mental_visible_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Mental/Not Visible" to="UnitWindow" method="_on_mental_not_visible_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Rank/Visible" to="UnitWindow" method="_on_rank_visible_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/UnitWindow/Rank/Not Visible" to="UnitWindow" method="_on_rank_not_visible_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Order Window Visibility/Order Window Hidden" to="OrderWindow" method="_on_order_window_hidden_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Order Window Visibility/Order Window Visibile" to="OrderWindow" method="_on_order_window_visibile_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Disembark Visibility/Disembark Hidden" to="OrderWindow" method="_on_disembark_hidden_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Disembark Visibility/Disembark Visibile" to="OrderWindow" method="_on_disembark_visibile_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Join Units Visibility/Join Units Hidden" to="OrderWindow" method="_on_join_units_hidden_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Join Units Visibility/Join Units Visible" to="OrderWindow" method="_on_join_units_visible_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Seperate Units Visibility/Seperate Units Visibile" to="OrderWindow" method="_on_seperate_units_visibile_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/OrderWindow/Seperate Units Visibility/Seperate Units Hidden" to="OrderWindow" method="_on_seperate_units_hidden_state_entered"]

@@ -1,0 +1,166 @@
+[gd_scene load_steps=19 format=3 uid="uid://cb787iag6sfc4"]
+
+[ext_resource type="Script" path="res://UI/unit_ui.gd" id="1_cp236"]
+[ext_resource type="Texture2D" uid="uid://goekclucrv33" path="res://assets/custom/icons/ammo2.png" id="2_mfcxm"]
+[ext_resource type="Texture2D" uid="uid://37argjb7je0y" path="res://assets/custom/fuel.png" id="3_b43xi"]
+[ext_resource type="Script" path="res://UI/supply_out.gd" id="4_jtdu0"]
+[ext_resource type="Texture2D" uid="uid://dq2f31231f5it" path="res://assets/custom/supply_in.png" id="5_1tqhi"]
+[ext_resource type="Texture2D" uid="uid://cgwhcm4gp5g61" path="res://assets/custom/icons/ammo3.png" id="6_57s02"]
+[ext_resource type="Script" path="res://UI/supply_in.gd" id="6_wojnv"]
+[ext_resource type="Script" path="res://UI/lowAmmo.gd" id="6_ywmx6"]
+[ext_resource type="Texture2D" uid="uid://0gca2v2jisvm" path="res://assets/custom/tread.png" id="7_6m18d"]
+[ext_resource type="Texture2D" uid="uid://bllgxk6w83ixv" path="res://assets/custom/wrench.png" id="8_e3sri"]
+[ext_resource type="Texture2D" uid="uid://bwgkasrynq11x" path="res://assets/custom/supply_out.png" id="9_2bejg"]
+[ext_resource type="Script" path="res://UI/LowFuel.gd" id="10_lhosv"]
+[ext_resource type="Texture2D" uid="uid://d3ud2rruh00s1" path="res://assets/custom/tact_unit_rect.png" id="13_twowy"]
+[ext_resource type="Texture2D" uid="uid://bqxi2y25qiqak" path="res://assets/custom/icon_tank.png" id="14_aeter"]
+[ext_resource type="Texture2D" uid="uid://cydkykpim6xg5" path="res://assets/custom/icon_transport.png" id="15_u8sdk"]
+[ext_resource type="Texture2D" uid="uid://cai0x2g8t5yec" path="res://assets/custom/icon_infantry.png" id="16_0y7pf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwpvl"]
+bg_color = Color(0.913725, 0.654902, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a03ca"]
+bg_color = Color(0.878431, 0.32549, 0, 1)
+
+[node name="UnitUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cp236")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -101.0
+offset_top = -83.0
+offset_right = 76.0
+offset_bottom = -43.0
+
+[node name="Fuel" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-88.5, -83.5)
+texture = ExtResource("3_b43xi")
+
+[node name="Ammo2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-90, -70)
+texture = ExtResource("2_mfcxm")
+
+[node name="fuel" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -76.5
+offset_top = -86.5
+offset_right = 72.5
+offset_bottom = -80.5
+theme_override_styles/fill = SubResource("StyleBoxFlat_kwpvl")
+value = 90.0
+show_percentage = false
+
+[node name="ammo" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -78.0
+offset_top = -73.0
+offset_right = 71.0
+offset_bottom = -67.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_a03ca")
+value = 75.0
+show_percentage = false
+
+[node name="SupplyOut" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -43.0
+offset_right = -32.0
+offset_bottom = -27.0
+script = ExtResource("4_jtdu0")
+
+[node name="SupplyOut" type="Sprite2D" parent="SupplyOut"]
+position = Vector2(16, 8)
+texture = ExtResource("9_2bejg")
+
+[node name="SupplyIn" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -43.0
+offset_bottom = -27.0
+script = ExtResource("6_wojnv")
+
+[node name="SupplyIn" type="Sprite2D" parent="SupplyIn"]
+position = Vector2(16, 8)
+texture = ExtResource("5_1tqhi")
+
+[node name="LowAmmo" type="Panel" parent="."]
+layout_mode = 0
+offset_top = -43.0
+offset_right = 16.0
+offset_bottom = -27.0
+script = ExtResource("6_ywmx6")
+
+[node name="Ammo3" type="Sprite2D" parent="LowAmmo"]
+position = Vector2(8, 8)
+texture = ExtResource("6_57s02")
+
+[node name="LowFuel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -43.0
+offset_right = 32.0
+offset_bottom = -27.0
+script = ExtResource("10_lhosv")
+
+[node name="Fuel2" type="Sprite2D" parent="LowFuel"]
+position = Vector2(8, 8)
+texture = ExtResource("3_b43xi")
+
+[node name="Treads" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 32.0
+offset_top = -43.0
+offset_right = 48.0
+offset_bottom = -27.0
+
+[node name="Tread" type="Sprite2D" parent="Treads"]
+position = Vector2(8, 8)
+texture = ExtResource("7_6m18d")
+
+[node name="Maint" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = -43.0
+offset_right = 64.0
+offset_bottom = -27.0
+
+[node name="Wrench" type="Sprite2D" parent="Maint"]
+position = Vector2(8, 8)
+texture = ExtResource("8_e3sri")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -75.0
+offset_right = 64.0
+offset_bottom = -43.0
+
+[node name="TactUnitRect" type="Sprite2D" parent="Panel2"]
+position = Vector2(64, 16)
+texture = ExtResource("13_twowy")
+
+[node name="IconTank" type="Sprite2D" parent="Panel2/TactUnitRect"]
+texture = ExtResource("14_aeter")
+
+[node name="IconTransport" type="Sprite2D" parent="Panel2/TactUnitRect"]
+visible = false
+texture = ExtResource("15_u8sdk")
+
+[node name="IconInfantry" type="Sprite2D" parent="Panel2/TactUnitRect"]
+visible = false
+texture = ExtResource("16_0y7pf")
