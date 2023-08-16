@@ -2,9 +2,6 @@ class_name Infantry
 extends BasicUnit
 
 signal in_range
-#signal embarked
-#var closing = false
-#var attacking = false
 var active_transfers = []
 @onready var target = position
 @onready var anim = $"AnimationPlayer"

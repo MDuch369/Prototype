@@ -2,16 +2,7 @@ extends BasicUnit
 
 signal in_range
 const MAX_CREW: int = 3
-#enum CrewStatus {
-#	ACTIVE,
-#	INACTIVE,
-#	EMPTY,
-#}
-#var crew_positions = {
-#	"driver" : CrewStatus.ACTIVE,
-#	"gunner" : CrewStatus.ACTIVE,
-#	"commander" : CrewStatus.ACTIVE
-#}
+
 @onready var crew_list: Array[Unit] = [$Modules/Driver, $Modules/Gunner, $Modules/Commander]
 var closing := false
 var active_transfers: Array = []

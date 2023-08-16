@@ -97,33 +97,3 @@ func finish_order():
 #			unit.set_order()
 #		### HACK END!!
 
-
-#func set_movement_target(movement_target: Vector2):
-#	navigation_agent.set_target_position(movement_target)
-#
-#func _on_velocity_computed(safe_velocity: Vector2):
-#	unit.velocity = safe_velocity
-#	unit.move_and_slide()
-
-
-#func _physics_process(delta):
-#	if active_order != null:
-#		var rotation_angle
-#		if status == "rotating":
-#			rotation_angle = get_angle_to(active_order.global_position)
-#			if is_rotated(rotation_angle, delta) == true:
-#				#unit.orders.remove_at(0)
-#				finish_order()
-#		if status == "moving":
-#			if follow_cursor == true:
-#				target = get_global_mouse_position()
-#			if unit.position.distance_to(active_order.global_position) > 15:
-#				rotation_angle = get_angle_to(active_order.global_position)
-#				if current_resources > 0:
-#					if is_rotated(rotation_angle, delta) == true:
-#						#check_collisions()
-#						move(active_order.global_position, delta)
-#				else:
-#					finish_order()
-#			else:
-#				finish_order()
