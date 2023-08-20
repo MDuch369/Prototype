@@ -39,7 +39,7 @@ SPEED = 30.0
 offset_left = 768.0
 offset_top = 104.0
 offset_bottom = -200.0
-initial_node_to_watch = NodePath("../../Units/IFV")
+initial_node_to_watch = NodePath("../../Units/Crew")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -3432.0
@@ -69,9 +69,6 @@ position = Vector2(624, 322)
 [node name="Units" type="Node2D" parent="."]
 position = Vector2(0, 2)
 
-[node name="Crew" parent="Units" instance=ExtResource("18_rgvv7")]
-position = Vector2(-56, 48)
-
 [node name="DebugTarget" parent="Units" instance=ExtResource("7_0mv6e")]
 position = Vector2(592, 320)
 
@@ -79,6 +76,9 @@ position = Vector2(592, 320)
 position = Vector2(392, 320)
 
 [node name="IFV" parent="Units" instance=ExtResource("10_b87mm")]
+position = Vector2(-152, -128)
+
+[node name="Crew" parent="Units" instance=ExtResource("18_rgvv7")]
 
 [node name="MinimapLayer" type="CanvasLayer" parent="."]
 visible = false

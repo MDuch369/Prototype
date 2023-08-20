@@ -24,8 +24,8 @@ func _on_separate_units_pressed():
 # TODO refactor
 func _on_disembark_pressed():
 	for unit in ui.world.selected_units:
-		if not unit.modules.transport == null:
-			unit.modules.transport.disembark()
+		if not unit.transport == null:
+			unit.transport.disembark()
 
 
 func _on_disembark_crew_pressed():

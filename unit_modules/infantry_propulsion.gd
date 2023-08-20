@@ -14,15 +14,20 @@ func _on_rotating_state_physics_processing(delta):
 	if is_instance_valid(active_order):
 		var angle = get_angle_to(active_order.global_position)
 		if  angle > 0.015 and angle <= PI:
-			unit.rotate(rotation_speed * delta)
-#			current_resources -= resource_usage * delta
+			if angle < rotation_speed * delta:
+				unit.rotate(angle)
+			else:
+				unit.rotate(rotation_speed * delta)
 		elif  angle < -0.015 and angle > -PI:
-			unit.rotate(-1 * rotation_speed * delta)
-#			current_resources -= resource_usage * delta
+			if -angle < rotation_speed * delta:
+				unit.rotate(angle)
+			else:
+				unit.rotate(-rotation_speed * delta)
 		elif (
 				active_order.type == active_order.Type.MOVE
 				or active_order.type == active_order.Type.EMBARK
 			):
+			print("moving")
 			_state_chart.send_event("move")
 		else:
 			finish_order()
