@@ -27,7 +27,6 @@ func _on_rotating_state_physics_processing(delta):
 				active_order.type == active_order.Type.MOVE
 				or active_order.type == active_order.Type.EMBARK
 			):
-			print("moving")
 			_state_chart.send_event("move")
 		else:
 			finish_order()
@@ -69,8 +68,15 @@ func move_and_embark(delta):
 	var motion = unit.velocity * delta
 	var collision = unit.move_and_collide(motion)
 	if is_instance_valid(collision): 
-		if collision.get_collider() == active_order.target_unit:
-			collision.get_collider().transport.embark(unit)
+		var transport_unit = collision.get_collider()
+		if transport_unit == active_order.target_unit:
+			if (
+					transport_unit.crew_list.size() < transport_unit.MAX_CREW
+					and unit.is_in_group("crew")
+				):
+				transport_unit.embark_crew(unit)
+			else:
+				transport_unit.transport.embark(unit)
 			unit.get_node("Orders").clear()
 #		print("collision :")
 #		print(collision.get_collider())
