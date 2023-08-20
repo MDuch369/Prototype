@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqcxibik7qls3"]
+[gd_scene load_steps=19 format=3 uid="uid://bqcxibik7qls3"]
 
 [ext_resource type="Script" path="res://Global/world.gd" id="1_ljdj8"]
 [ext_resource type="Script" path="res://Global/Camera.gd" id="2_hb84s"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="15_1uyhn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="16_wm8gv"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="17_tmcsg"]
-[ext_resource type="PackedScene" uid="uid://clxq68d5k6akr" path="res://units/crew.tscn" id="18_rgvv7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_neowx"]
 vertices = PackedVector2Array(864, -1231, 1416, 433, 864, 433, 608, -703, -256, -1207, -192, 481, 360, 441)
@@ -39,7 +38,7 @@ SPEED = 30.0
 offset_left = 768.0
 offset_top = 104.0
 offset_bottom = -200.0
-initial_node_to_watch = NodePath("../../Units/Crew")
+initial_node_to_watch = NodePath("../../Units/IFV")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -3432.0
@@ -76,9 +75,6 @@ position = Vector2(592, 320)
 position = Vector2(392, 320)
 
 [node name="IFV" parent="Units" instance=ExtResource("10_b87mm")]
-position = Vector2(-152, -128)
-
-[node name="Crew" parent="Units" instance=ExtResource("18_rgvv7")]
 
 [node name="MinimapLayer" type="CanvasLayer" parent="."]
 visible = false

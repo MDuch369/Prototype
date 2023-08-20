@@ -133,6 +133,10 @@ hframes = 2
 [node name="Transport" type="Node2D" parent="Modules"]
 script = ExtResource("9_q2rwa")
 
+[node name="Crew" parent="Modules/Transport" instance=ExtResource("6_ydwas")]
+process_mode = 4
+visible = false
+
 [node name="Crew" type="Node2D" parent="."]
 script = ExtResource("11_s8sda")
 

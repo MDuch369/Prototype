@@ -11,6 +11,7 @@ var ui
 #@onready var _state_chart: StateChart = $StateChart
 #@onready var ui = world.get_node("UI")
 @onready var _state_chart = $StateChart
+@onready var crew = $Crew
 @onready var propulsion = $Modules/Tracks
 @onready var secondary_propulsion = null
 @onready var main_weapon = $Modules/Autocannon
@@ -50,9 +51,10 @@ func is_rotated(angle):
 func embark_crew(unit):
 	if crew_list.size() <= MAX_CREW:
 		crew_list.push_back(unit)
-		unit.PROCESS_MODE_DISABLED
+		unit.set_process_mode(ProcessMode.PROCESS_MODE_DISABLED)
 #		unit.global_position = global_position
 		unit.visible = false
+		unit.reparent(crew)
 #	crew_positions["driver"] = CrewStatus.EMPTY
 #	crew_positions["gunner"] = CrewStatus.EMPTY
 #	crew_positions["commander"] = CrewStatus.EMPTY
@@ -84,12 +86,12 @@ func embark_commander(unit):
 func disembark_crew():
 	var n = 0
 	for unit in crew_list:
-		unit.PROCESS_MODE_INHERIT
+		unit.set_process_mode(ProcessMode.PROCESS_MODE_INHERIT)
 #		print(unit)
 		unit.global_position = global_position + Vector2(25 * n, 50)
-		units.add_child(unit)
 		unit.visible = true
 		unit.set_pickable(true)
+		unit.reparent(units)
 		n += 1
 	disembark_driver()
 	disembark_gunner()
