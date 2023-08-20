@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfvqvq722r7d"]
+[gd_scene load_steps=6 format=3 uid="uid://cfvqvq722r7d"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_a8eho"]
+[ext_resource type="Script" path="res://unit_modules/module_crew.gd" id="1_asymn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_ovcry"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_0gjux"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_2kcts"]
 
 [node name="ModuleCrew" type="Node"]
+script = ExtResource("1_asymn")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("1_a8eho")
