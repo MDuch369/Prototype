@@ -84,6 +84,7 @@ func embark_commander(unit):
 
 
 func disembark_crew():
+	get_node("Orders").clear()
 	var n = 0
 	for unit in crew_list:
 		unit.set_process_mode(ProcessMode.PROCESS_MODE_INHERIT)

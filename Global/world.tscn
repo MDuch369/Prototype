@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bqcxibik7qls3"]
+[gd_scene load_steps=20 format=3 uid="uid://bqcxibik7qls3"]
 
 [ext_resource type="Script" path="res://Global/world.gd" id="1_ljdj8"]
 [ext_resource type="Script" path="res://Global/Camera.gd" id="2_hb84s"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Global/DirectionCursor.gd" id="8_rpfff"]
 [ext_resource type="Texture2D" uid="uid://dvowmrgo8gvjw" path="res://assets/custom/cursors/cursor_direction.png" id="10_0212a"]
 [ext_resource type="PackedScene" uid="uid://blgk2vvvf6x6q" path="res://units/IFV.tscn" id="10_b87mm"]
+[ext_resource type="PackedScene" uid="uid://clxq68d5k6akr" path="res://units/crew.tscn" id="10_srjhf"]
 [ext_resource type="Texture2D" uid="uid://crdmmpskkyw38" path="res://assets/non_custom/Free SciFi Inventory/Inventory Boxes/scifi_inventory01_box_back.png" id="11_1cuk3"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="12_hbn34"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="13_aetmy"]
@@ -75,6 +76,28 @@ position = Vector2(592, 320)
 position = Vector2(392, 320)
 
 [node name="IFV" parent="Units" instance=ExtResource("10_b87mm")]
+position = Vector2(-120, -80)
+
+[node name="Crew" parent="Units" instance=ExtResource("10_srjhf")]
+position = Vector2(-32, 24)
+
+[node name="Crew2" parent="Units" instance=ExtResource("10_srjhf")]
+position = Vector2(-64, 48)
+
+[node name="Crew3" parent="Units" instance=ExtResource("10_srjhf")]
+position = Vector2(-32, 48)
+
+[node name="Crew4" parent="Units" instance=ExtResource("10_srjhf")]
+position = Vector2(-64, 24)
+
+[node name="Crew5" parent="Units" instance=ExtResource("10_srjhf")]
+position = Vector2(-96, 24)
+
+[node name="Crew6" parent="Units" instance=ExtResource("10_srjhf")]
+position = Vector2(-96, 48)
+
+[node name="Crew7" parent="Units" instance=ExtResource("10_srjhf")]
+position = Vector2(-64, 72)
 
 [node name="MinimapLayer" type="CanvasLayer" parent="."]
 visible = false

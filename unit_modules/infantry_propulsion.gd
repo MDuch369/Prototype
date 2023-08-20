@@ -70,13 +70,14 @@ func move_and_embark(delta):
 	if is_instance_valid(collision): 
 		var transport_unit = collision.get_collider()
 		if transport_unit == active_order.target_unit:
+			var transport = transport_unit.transport
 			if (
 					transport_unit.crew_list.size() < transport_unit.MAX_CREW
 					and unit.is_in_group("crew")
 				):
 				transport_unit.embark_crew(unit)
-			else:
-				transport_unit.transport.embark(unit)
+			elif transport.embarked_units.size() < transport.TRANSPORT_CAPACITY:
+				transport.embark(unit)
 			unit.get_node("Orders").clear()
 #		print("collision :")
 #		print(collision.get_collider())

@@ -1,6 +1,6 @@
 extends Module
 
-const TRANSPORT_CAPACITY := 12
+const TRANSPORT_CAPACITY := 6
 var embarked_units: Array[BasicUnit] = []
 #var transported_units: Array = []
 
