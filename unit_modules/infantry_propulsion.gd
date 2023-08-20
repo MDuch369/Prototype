@@ -3,7 +3,7 @@ extends Module
 
 @export var movement_speed: float
 @export var rotation_speed: float
-@onready var _state_chart: StateChart = $"PropulsionStateChart"
+@onready var _state_chart: StateChart = $"../../StateChart"
 @onready var target = position
 #@onready var unit = $"../.."
 
@@ -34,7 +34,7 @@ func _on_moving_state_physics_processing(delta):
 #		target = get_global_mouse_position()
 	if (
 			is_instance_valid(active_order) 
-			and unit.position.distance_to(active_order.global_position) > 15
+			and unit.position.distance_to(active_order.global_position) > 5
 		):
 		rotation_angle = get_angle_to(active_order.global_position)
 		if is_rotated(rotation_angle, delta) == true:

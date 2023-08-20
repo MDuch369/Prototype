@@ -1,13 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://clxq68d5k6akr"]
+[gd_scene load_steps=16 format=3 uid="uid://clxq68d5k6akr"]
 
-[ext_resource type="Script" path="res://units/infantry.gd" id="1_b2l5q"]
+[ext_resource type="Script" path="res://units/crew.gd" id="1_iyucf"]
 [ext_resource type="Texture2D" uid="uid://bjk4151vaieyi" path="res://assets/custom/units/crew.png" id="2_a22k4"]
-[ext_resource type="Script" path="res://units/soldier_modules.gd" id="3_dgir0"]
 [ext_resource type="PackedScene" uid="uid://c15lmpxlj24we" path="res://unit_modules/propulsion.tscn" id="4_wug6g"]
 [ext_resource type="Script" path="res://unit_modules/legs.gd" id="5_rtqqe"]
 [ext_resource type="Script" path="res://unit_modules/rifle.gd" id="6_il7wv"]
 [ext_resource type="PackedScene" uid="uid://cpfdas1ag58bt" path="res://unit_modules/weapon.tscn" id="6_iyyn4"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="9_4nl5x"]
 [ext_resource type="Script" path="res://units/Orders.gd" id="9_h4fxn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="10_7f2cp"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="11_vlyk0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="12_jihcf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y87cj"]
 radius = 8.0
@@ -48,7 +51,7 @@ _data = {
 }
 
 [node name="Crew" type="CharacterBody2D"]
-script = ExtResource("1_b2l5q")
+script = ExtResource("1_iyucf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_y87cj")
@@ -69,7 +72,6 @@ libraries = {
 texture = ExtResource("2_a22k4")
 
 [node name="Modules" type="Node2D" parent="."]
-script = ExtResource("3_dgir0")
 
 [node name="Legs" parent="Modules" instance=ExtResource("4_wug6g")]
 script = ExtResource("5_rtqqe")
@@ -87,3 +89,52 @@ avoidance_enabled = true
 radius = 5.0
 neighbor_distance = 50.0
 debug_enabled = true
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("9_4nl5x")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("10_7f2cp")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("11_vlyk0")
+
+[node name="OnMove" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("12_jihcf")
+to = NodePath("../../Moving")
+event = &"move"
+
+[node name="OnRotate" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("12_jihcf")
+to = NodePath("../../Rotating")
+event = &"rotate"
+
+[node name="Moving" type="Node" parent="StateChart/Root"]
+script = ExtResource("11_vlyk0")
+
+[node name="OnRotate" type="Node" parent="StateChart/Root/Moving"]
+script = ExtResource("12_jihcf")
+to = NodePath("../../Rotating")
+event = &"rotate"
+
+[node name="OnStop" type="Node" parent="StateChart/Root/Moving"]
+script = ExtResource("12_jihcf")
+to = NodePath("../../Idle")
+event = &"stop"
+
+[node name="Rotating" type="Node" parent="StateChart/Root"]
+script = ExtResource("11_vlyk0")
+
+[node name="OnMove" type="Node" parent="StateChart/Root/Rotating"]
+script = ExtResource("12_jihcf")
+to = NodePath("../../Moving")
+event = &"move"
+
+[node name="OnStop" type="Node" parent="StateChart/Root/Rotating"]
+script = ExtResource("12_jihcf")
+to = NodePath("../../Idle")
+event = &"stop"
+
+[connection signal="state_physics_processing" from="StateChart/Root/Moving" to="Modules/Legs" method="_on_moving_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Rotating" to="Modules/Legs" method="_on_rotating_state_physics_processing"]

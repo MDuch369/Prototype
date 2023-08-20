@@ -62,13 +62,13 @@ func set_order():
 		# /refactor 
 		var set_ord = order_array[0]
 		if set_ord.type == set_ord.Type.MOVE:
-			propulsion._state_chart.send_event("move")
+			unit._state_chart.send_event("move")
 			propulsion.active_order = set_ord
 			propulsion.target = set_ord.global_position
 #			propulsion.status = "moving"
 			#propulsion.set_movement_target(order.position)
 		elif set_ord.type == set_ord.Type.ROTATE:
-			propulsion._state_chart.send_event("rotate")
+			unit._state_chart.send_event("rotate")
 			propulsion.active_order = set_ord
 			propulsion.target = set_ord.global_position
 #			propulsion.status = "rotating"
@@ -78,7 +78,7 @@ func set_order():
 			weapon.target = set_ord.target_unit
 			weapon.engage_target()
 		elif set_ord.type == set_ord.Type.EMBARK:
-			propulsion._state_chart.send_event("move")
+			unit._state_chart.send_event("move")
 			propulsion.active_order = set_ord
 			propulsion.target = set_ord.target_unit.global_position
 		elif set_ord.type == set_ord.Type.SUPPLY:

@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ulj57liwy45e" path="res://assets/custom/objects/smoke_big.png" id="10_kcnbd"]
 [ext_resource type="Script" path="res://units/Orders.gd" id="11_7v2st"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="11_bgl18"]
-[ext_resource type="Script" path="res://unit_modules/Crew.gd" id="11_kqhg1"]
+[ext_resource type="Script" path="res://unit_modules/crew_positions.gd" id="11_s8sda"]
 [ext_resource type="Texture2D" uid="uid://cus6f2jj2336n" path="res://assets/custom/units/ATGM.png" id="12_0avq8"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="12_qlcgd"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="13_fb1o1"]
@@ -69,7 +69,7 @@ state = NodePath("../../../Damage/Not Damaged")
 
 [sub_resource type="Resource" id="Resource_ylqk0"]
 script = ExtResource("11_bgl18")
-state = NodePath("../../../../../../../Crew/CrewStateChart/root/Driver/Active")
+state = NodePath("../../../../Crew/Driver/Active")
 
 [sub_resource type="Resource" id="Resource_6hhvo"]
 script = ExtResource("12_qlcgd")
@@ -77,7 +77,7 @@ guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResourc
 
 [sub_resource type="Resource" id="Resource_wst0f"]
 script = ExtResource("11_bgl18")
-state = NodePath("../../../../../../../Crew/CrewStateChart/root/Driver/Active")
+state = NodePath("../../../../Crew/Driver/Active")
 
 [sub_resource type="Resource" id="Resource_0dias"]
 script = ExtResource("12_qlcgd")
@@ -114,97 +114,6 @@ script = ExtResource("11_7v2st")
 [node name="Tracks" parent="Modules" instance=ExtResource("4_teo1i")]
 script = ExtResource("5_am2q6")
 
-[node name="PropulsionStateChart" type="Node" parent="Modules/Tracks"]
-script = ExtResource("13_fb1o1")
-
-[node name="Root" type="Node" parent="Modules/Tracks/PropulsionStateChart"]
-script = ExtResource("14_sk5vh")
-
-[node name="Activity" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity"]
-script = ExtResource("16_8pbap")
-
-[node name="On Rotate" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity/Idle"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Rotating")
-event = &"rotate"
-guard = SubResource("Resource_6hhvo")
-
-[node name="On Move" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity/Idle"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Moving")
-event = &"move"
-guard = SubResource("Resource_0dias")
-
-[node name="Moving" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity"]
-script = ExtResource("16_8pbap")
-
-[node name="On Rotate" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity/Moving"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Rotating")
-event = &"rotate"
-
-[node name="On Stop" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity/Moving"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Idle")
-event = &"stop"
-
-[node name="Rotating" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity"]
-script = ExtResource("16_8pbap")
-
-[node name="On Move" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity/Rotating"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Moving")
-event = &"move"
-
-[node name="On Stop" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Activity/Rotating"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Idle")
-event = &"stop"
-
-[node name="Fuel" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Fuel Present")
-
-[node name="Fuel Present" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Fuel"]
-script = ExtResource("16_8pbap")
-
-[node name="On Fuel Exhausted" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Fuel/Fuel Present"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Fuel Absent")
-event = &"fuel exhausted"
-
-[node name="Fuel Absent" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Fuel"]
-script = ExtResource("16_8pbap")
-
-[node name="On Fuel Reilled" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Fuel/Fuel Absent"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Fuel Present")
-event = &"fuel refilled"
-
-[node name="Damage" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Not Damaged")
-
-[node name="Not Damaged" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Damage"]
-script = ExtResource("16_8pbap")
-
-[node name="On Damaged" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Damage/Not Damaged"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Damaged")
-event = &"Damaged"
-
-[node name="Damaged" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Damage"]
-script = ExtResource("16_8pbap")
-
-[node name="On Repaired" type="Node" parent="Modules/Tracks/PropulsionStateChart/Root/Damage/Damaged"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Not Damaged")
-event = &"Repaired"
-
 [node name="Autocannon" parent="Modules" instance=ExtResource("6_60k22")]
 position = Vector2(5, 0)
 script = ExtResource("7_3aj6l")
@@ -221,122 +130,11 @@ texture = ExtResource("8_jgva0")
 offset = Vector2(8.26016, 0)
 hframes = 2
 
-[node name="WeaponStateChart" type="Node" parent="Modules/Autocannon"]
-script = ExtResource("13_fb1o1")
-
-[node name="Root" type="Node" parent="Modules/Autocannon/WeaponStateChart"]
-script = ExtResource("14_sk5vh")
-
-[node name="Activity" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity"]
-script = ExtResource("16_8pbap")
-
-[node name="On Shoot" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/Idle"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Shooting")
-event = &"shoot"
-
-[node name="On Rotate" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/Idle"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../load + rot/Rotating")
-event = &"rotate"
-
-[node name="Shooting" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity"]
-script = ExtResource("16_8pbap")
-
-[node name="On Rotate" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/Shooting"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../load + rot/Rotating")
-event = &"rotate"
-
-[node name="On Ammo Exhausted" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/Shooting"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../../Loaded/No Ammo")
-event = &"ammo exhausted"
-
-[node name="On Reload" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/Shooting"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../load + rot/Loading")
-event = &"reload"
-
-[node name="load + rot" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity"]
-script = ExtResource("14_sk5vh")
-
-[node name="Rotating" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/load + rot"]
-script = ExtResource("16_8pbap")
-
-[node name="On Stop Rotating" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/load + rot/Rotating"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../../Idle")
-event = &"stop rotating"
-
-[node name="On Shoot" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/load + rot/Rotating"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../../Shooting")
-event = &"shoot"
-
-[node name="Loading" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/load + rot"]
-script = ExtResource("16_8pbap")
-
-[node name="On Loaded" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Activity/load + rot/Loading"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../../../Loaded/Loaded")
-
-[node name="Loaded" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Loaded")
-
-[node name="Loaded" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Loaded"]
-script = ExtResource("16_8pbap")
-
-[node name="On Unload" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Loaded/Loaded"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Not Loaded")
-event = &"unload"
-
-[node name="Not Loaded" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Loaded"]
-script = ExtResource("16_8pbap")
-
-[node name="On Load" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Loaded/Not Loaded"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../../Activity/load + rot/Loading")
-event = &"load"
-
-[node name="No Ammo" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Loaded"]
-script = ExtResource("16_8pbap")
-
-[node name="On Ammo Replenished" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Loaded/No Ammo"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Not Loaded")
-
-[node name="Damage" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Not Damaged")
-
-[node name="Not Damaged" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Damage"]
-script = ExtResource("16_8pbap")
-
-[node name="On Damaged" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Damage/Not Damaged"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Damaged")
-event = &"damaged"
-
-[node name="Damaged" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Damage"]
-script = ExtResource("16_8pbap")
-
-[node name="On Damage Repaired" type="Node" parent="Modules/Autocannon/WeaponStateChart/Root/Damage/Damaged"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Not Damaged")
-event = &"damage repaired"
-
 [node name="Transport" type="Node2D" parent="Modules"]
 script = ExtResource("9_q2rwa")
 
 [node name="Crew" type="Node2D" parent="."]
-script = ExtResource("11_kqhg1")
+script = ExtResource("11_s8sda")
 
 [node name="Driver" parent="Crew" instance=ExtResource("6_ydwas")]
 process_mode = 4
@@ -349,72 +147,6 @@ visible = false
 [node name="Commander" parent="Crew" instance=ExtResource("6_ydwas")]
 process_mode = 4
 visible = false
-
-[node name="CrewStateChart" type="Node" parent="Crew"]
-script = ExtResource("13_fb1o1")
-
-[node name="root" type="Node" parent="Crew/CrewStateChart"]
-script = ExtResource("14_sk5vh")
-
-[node name="Driver" type="Node" parent="Crew/CrewStateChart/root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Active")
-
-[node name="Active" type="Node" parent="Crew/CrewStateChart/root/Driver"]
-script = ExtResource("16_8pbap")
-
-[node name="OnDriverInactive" type="Node" parent="Crew/CrewStateChart/root/Driver/Active"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Inactive")
-event = &"driver_inactive"
-
-[node name="Inactive" type="Node" parent="Crew/CrewStateChart/root/Driver"]
-script = ExtResource("16_8pbap")
-
-[node name="OnDriverActive" type="Node" parent="Crew/CrewStateChart/root/Driver/Inactive"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Active")
-event = &"driver_active"
-
-[node name="gunner" type="Node" parent="Crew/CrewStateChart/root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Active")
-
-[node name="Active" type="Node" parent="Crew/CrewStateChart/root/gunner"]
-script = ExtResource("16_8pbap")
-
-[node name="OnGunnerInactive" type="Node" parent="Crew/CrewStateChart/root/gunner/Active"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Inactive")
-event = &"gunner_inactive"
-
-[node name="Inactive" type="Node" parent="Crew/CrewStateChart/root/gunner"]
-script = ExtResource("16_8pbap")
-
-[node name="OnGunnerActive" type="Node" parent="Crew/CrewStateChart/root/gunner/Inactive"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Active")
-event = &"gunner_active"
-
-[node name="Comander" type="Node" parent="Crew/CrewStateChart/root"]
-script = ExtResource("15_wugmw")
-initial_state = NodePath("Active")
-
-[node name="Active" type="Node" parent="Crew/CrewStateChart/root/Comander"]
-script = ExtResource("16_8pbap")
-
-[node name="OnCommanderInactive" type="Node" parent="Crew/CrewStateChart/root/Comander/Active"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Inactive")
-event = &"commander_inactive"
-
-[node name="Inactive" type="Node" parent="Crew/CrewStateChart/root/Comander"]
-script = ExtResource("16_8pbap")
-
-[node name="OnCommanderActive" type="Node" parent="Crew/CrewStateChart/root/Comander/Inactive"]
-script = ExtResource("17_4f6o6")
-to = NodePath("../../Active")
-event = &"commander_active"
 
 [node name="SmokeBig" type="Sprite2D" parent="."]
 visible = false
@@ -445,7 +177,7 @@ script = ExtResource("16_8pbap")
 [node name="OnDriverInactive" type="Node" parent="StateChart/Root/Crew/Driver/Active"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Inactive")
-event = &"driver_inactive"
+event = &"disable driver"
 
 [node name="Inactive" type="Node" parent="StateChart/Root/Crew/Driver"]
 script = ExtResource("16_8pbap")
@@ -453,7 +185,7 @@ script = ExtResource("16_8pbap")
 [node name="OnDriverActive" type="Node" parent="StateChart/Root/Crew/Driver/Inactive"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Active")
-event = &"driver_active"
+event = &"enable driver"
 
 [node name="gunner" type="Node" parent="StateChart/Root/Crew"]
 script = ExtResource("15_wugmw")
@@ -465,7 +197,7 @@ script = ExtResource("16_8pbap")
 [node name="OnGunnerInactive" type="Node" parent="StateChart/Root/Crew/gunner/Active"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Inactive")
-event = &"gunner_inactive"
+event = &"disable gunner"
 
 [node name="Inactive" type="Node" parent="StateChart/Root/Crew/gunner"]
 script = ExtResource("16_8pbap")
@@ -473,7 +205,7 @@ script = ExtResource("16_8pbap")
 [node name="OnGunnerActive" type="Node" parent="StateChart/Root/Crew/gunner/Inactive"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Active")
-event = &"gunner_active"
+event = &"enable gunner"
 
 [node name="Comander" type="Node" parent="StateChart/Root/Crew"]
 script = ExtResource("15_wugmw")
@@ -485,7 +217,7 @@ script = ExtResource("16_8pbap")
 [node name="OnCommanderInactive" type="Node" parent="StateChart/Root/Crew/Comander/Active"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Inactive")
-event = &"commander_inactive"
+event = &"disable commander"
 
 [node name="Inactive" type="Node" parent="StateChart/Root/Crew/Comander"]
 script = ExtResource("16_8pbap")
@@ -493,7 +225,7 @@ script = ExtResource("16_8pbap")
 [node name="OnCommanderActive" type="Node" parent="StateChart/Root/Crew/Comander/Inactive"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Active")
-event = &"commander_active"
+event = &"enable commander"
 
 [node name="Autocannon" type="Node" parent="StateChart/Root"]
 script = ExtResource("14_sk5vh")
@@ -690,3 +422,6 @@ script = ExtResource("16_8pbap")
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Not Damaged")
 event = &"Repaired"
+
+[connection signal="state_physics_processing" from="StateChart/Root/Tracks/Activity/Moving" to="Modules/Tracks" method="_on_moving_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Tracks/Activity/Rotating" to="Modules/Tracks" method="_on_rotating_state_physics_processing"]

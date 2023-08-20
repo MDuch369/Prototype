@@ -3,13 +3,14 @@ extends BasicUnit
 signal in_range
 const MAX_CREW: int = 3
 
-@onready var crew_list: Array[Unit] = [$Modules/Driver, $Modules/Gunner, $Modules/Commander]
+@onready var crew_list: Array[Unit] = [$Crew/Driver, $Crew/Gunner, $Crew/Commander]
 var closing := false
 var active_transfers: Array = []
 #var selected_unit = null
 var ui
 #@onready var _state_chart: StateChart = $StateChart
 #@onready var ui = world.get_node("UI")
+@onready var _state_chart = $StateChart
 @onready var propulsion = $Modules/Tracks
 @onready var secondary_propulsion = null
 @onready var main_weapon = $Modules/Autocannon
@@ -66,17 +67,17 @@ func embark_crew(unit):
 
 
 func embark_driver(unit):
-	propulsion._state_chart.send_event("crew enabled")
+	_state_chart.send_event("enable driver")
 	ui._state_chart.send_event("enable driver")
 
 
 func embark_gunner(unit):
-	main_weapon._state_chart.send_event("crew enabled")
+	_state_chart.send_event("enable gunner")
 	ui._state_chart.send_event("enable gunner")
 
 
 func embark_commander(unit):
-	
+	_state_chart.send_event("enable commander")
 	ui._state_chart.send_event("enable commander")
 
 
@@ -86,8 +87,10 @@ func disembark_crew():
 		unit.PROCESS_MODE_INHERIT
 #		print(unit)
 		unit.global_position = global_position + Vector2(25 * n, 50)
-		n += 1
+		units.add_child(unit)
 		unit.visible = true
+		unit.set_pickable(true)
+		n += 1
 	disembark_driver()
 	disembark_gunner()
 	disembark_commander()
@@ -96,17 +99,17 @@ func disembark_crew():
 
 
 func disembark_driver():
-	propulsion._state_chart.send_event("crew disabled")
+	_state_chart.send_event("disable driver")
 	ui._state_chart.send_event("disable driver")
 
 
 func disembark_gunner():
-	main_weapon._state_chart.send_event("crew disabled")
+	_state_chart.send_event("disable gunner")
 	ui._state_chart.send_event("disable gunner")
 
 
 func disembark_commander():
-	
+	_state_chart.send_event("disable commander")
 	ui._state_chart.send_event("disable commander")
 
 # damage

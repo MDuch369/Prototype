@@ -5,7 +5,7 @@ extends ModuleResource
 @export var rotation_speed: float
 #var crew_pos_1: CrewPosition = CrewPosition.DRIVER
 @onready var target = position
-@onready var _state_chart: StateChart = $"PropulsionStateChart"
+@onready var _state_chart: StateChart = $"../../StateChart"
 #@onready var collision_ray = $"../../RayCast2D"
 #@onready var navigation_agent: NavigationAgent2D = $"../../NavigationAgent2D"
 #var follow_cursor = false
