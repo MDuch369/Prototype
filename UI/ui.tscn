@@ -285,7 +285,6 @@ position = Vector2(140, 0)
 texture = ExtResource("17_maekp")
 
 [node name="PassangerNumber" type="Label" parent="UnitWindow/PanelFull/Passangers"]
-visible = false
 offset_left = 20.0
 offset_top = -12.0
 offset_right = 63.0

@@ -5,6 +5,8 @@ var displayed_unit: Unit
 @onready var unit_name = $PanelFull/Name
 @onready var mental = $PanelFull/Mental
 @onready var crew = $PanelFull/Crew
+@onready var passangers = $PanelFull/Passangers
+@onready var passangers_num = $PanelFull/Passangers/PassangerNumber
 @onready var rank = $PanelFull/Rank
 @onready var xp = $PanelFull/XP
 @onready var xp_bar = $PanelFull/XP/xp
@@ -25,6 +27,11 @@ func _process(delta):
 		fuel_bar.value =  displayed_unit.propulsion.current_resources
 		ammo_big_bar.value =  displayed_unit.main_weapon.current_resources
 		maint_bar.value =  displayed_unit.maintenance
+		if not displayed_unit.transport == null:
+			passangers_num.text = (
+					str(displayed_unit.transport.embarked_units.size())
+					+ "/" + str(displayed_unit.transport.TRANSPORT_CAPACITY)
+				)
 
 func show_unit(unit):
 	if not unit is Infantry: # TEMP CODE
@@ -59,6 +66,12 @@ func show_unit(unit):
 		xp.visible = true
 		xp_bar.value = unit.experience
 #		xp_bar.max_value = 100.0
+		_state_chart.send_event("show passangers")
+		passangers.visible = true
+		passangers_num.text = (
+				str(displayed_unit.transport.embarked_units.size())
+				+ "/" + str(displayed_unit.transport.TRANSPORT_CAPACITY)
+		)
 		_state_chart.send_event("show ammo")
 		ammo_big.visible = true
 		ammo_big_bar.value = unit.main_weapon.current_resources
