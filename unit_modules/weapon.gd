@@ -19,8 +19,8 @@ var weapon_range: float
 #var max_magazine_ammo: int 
 #var magazine_ammo: int
 @onready var reload_timer = $ReloadTimer
-#@onready var _unit_state_chart: StateChart = $"../../StateChart"
-@onready var _state_chart: StateChart = $WeaponStateChart
+@onready var _state_chart: StateChart = $"../../StateChart"
+#@onready var _state_chart: StateChart = $WeaponStateChart
 @onready var projectile: PackedScene = preload("res://unit_modules/projectile.tscn")
 
 
@@ -48,7 +48,7 @@ func _on_shooting_state_physics_processing(delta) -> void:
 	if target_destroyed(target):
 		target = null
 		angle_to_target = -rotation
-		_state_chart.send_event("rotate")
+		_state_chart.send_event("rotate turret")
 		active_order.clear()
 
 
@@ -139,7 +139,7 @@ func engage_target() -> void:
 			rotate_vehicle(angle_to_target)
 		move_closer()
 	elif not check_turret_rotation(angle_to_target):
-		_state_chart.send_event("rotate")
+		_state_chart.send_event("rotate turret")
 	else: 
 		_state_chart.send_event("shoot")
 
@@ -153,7 +153,7 @@ func _on_shooting_state_entered() -> void:
 	
 	if target_destroyed(target) or target == null:
 		angle_to_target = 0.0
-		_state_chart.send_event("rotate")
+		_state_chart.send_event("rotate turret")
 		active_order.clear()
 
 

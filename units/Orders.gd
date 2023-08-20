@@ -73,7 +73,7 @@ func set_order():
 			propulsion.target = set_ord.global_position
 #			propulsion.status = "rotating"
 		elif set_ord.type == set_ord.Type.ATTACK:
-			weapon._state_chart.send_event("shoot")
+			unit._state_chart.send_event("shoot")
 			weapon.active_order = set_ord
 			weapon.target = set_ord.target_unit
 			weapon.engage_target()

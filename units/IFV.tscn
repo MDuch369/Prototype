@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://blgk2vvvf6x6q"]
+[gd_scene load_steps=36 format=3 uid="uid://blgk2vvvf6x6q"]
 
 [ext_resource type="Script" path="res://units/IFV.gd" id="1_adrbn"]
 [ext_resource type="Texture2D" uid="uid://dcx3fgtoirchq" path="res://assets/custom/units/IFV_body.png" id="2_o0ig4"]
@@ -58,6 +58,22 @@ tracks/0/keys = {
 _data = {
 "tank_fire": SubResource("Animation_o1igj")
 }
+
+[sub_resource type="Resource" id="Resource_a76u3"]
+script = ExtResource("11_bgl18")
+state = NodePath("../../../../Crew/gunner/Active")
+
+[sub_resource type="Resource" id="Resource_vs244"]
+script = ExtResource("11_bgl18")
+state = NodePath("../../../Loaded/Loaded")
+
+[sub_resource type="Resource" id="Resource_6vlt6"]
+script = ExtResource("11_bgl18")
+state = NodePath("../../../Damage/Not Damaged")
+
+[sub_resource type="Resource" id="Resource_8g8dw"]
+script = ExtResource("12_qlcgd")
+guards = Array[Resource("res://addons/godot_state_charts/guard.gd")]([SubResource("Resource_a76u3"), SubResource("Resource_vs244"), SubResource("Resource_6vlt6")])
 
 [sub_resource type="Resource" id="Resource_2d24i"]
 script = ExtResource("11_bgl18")
@@ -245,11 +261,12 @@ script = ExtResource("16_8pbap")
 script = ExtResource("17_4f6o6")
 to = NodePath("../../Shooting")
 event = &"shoot"
+guard = SubResource("Resource_8g8dw")
 
 [node name="On Rotate" type="Node" parent="StateChart/Root/Autocannon/Activity/Idle"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../load + rot/Rotating")
-event = &"rotate"
+event = &"rotate turret"
 
 [node name="Shooting" type="Node" parent="StateChart/Root/Autocannon/Activity"]
 script = ExtResource("16_8pbap")
@@ -257,7 +274,7 @@ script = ExtResource("16_8pbap")
 [node name="On Rotate" type="Node" parent="StateChart/Root/Autocannon/Activity/Shooting"]
 script = ExtResource("17_4f6o6")
 to = NodePath("../../load + rot/Rotating")
-event = &"rotate"
+event = &"rotate turret"
 
 [node name="On Ammo Exhausted" type="Node" parent="StateChart/Root/Autocannon/Activity/Shooting"]
 script = ExtResource("17_4f6o6")
@@ -427,5 +444,9 @@ script = ExtResource("17_4f6o6")
 to = NodePath("../../Not Damaged")
 event = &"Repaired"
 
+[connection signal="state_entered" from="StateChart/Root/Autocannon/Activity/Shooting" to="Modules/Autocannon" method="_on_shooting_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Autocannon/Activity/Shooting" to="Modules/Autocannon" method="_on_shooting_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Autocannon/Activity/load + rot/Rotating" to="Modules/Autocannon" method="_on_rotating_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Autocannon/Activity/load + rot/Loading" to="Modules/Autocannon" method="_on_loading_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Tracks/Activity/Moving" to="Modules/Tracks" method="_on_moving_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Tracks/Activity/Rotating" to="Modules/Tracks" method="_on_rotating_state_physics_processing"]
